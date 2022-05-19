@@ -4,4 +4,11 @@ import { defineNuxtConfig } from 'nuxt';
 export default defineNuxtConfig({
 	buildModules: ['@nuxtjs/sanity'],
 	plugins: ['@/plugins/sanity-blocks.js'],
+	vite: {
+		build: {
+			rollupOptions: {
+				external: ['chalk'],
+			},
+		},
+	},
 });
