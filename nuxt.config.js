@@ -21,7 +21,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['@/plugins/sanity-blocks.js'],
+  plugins: ['@/plugins/sanity-blocks.js', '@/plugins/sanity-image-builder.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -47,5 +47,6 @@ export default {
 
   sanity: {
     projectId: 'ul94kzl8',
+    useCdn: true,
   },
 }
