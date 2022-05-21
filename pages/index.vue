@@ -1,5 +1,34 @@
 <template>
   <Main>
+    <div class="mt-16 mx-auto max-w-7xl px-4 sm:mt-24">
+      <div class="text-center">
+        <h1
+          class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl"
+        >
+          <span class="block xl:inline">The home of</span>
+          <br />
+          <span class="block text-gray-900 xl:inline">SHAY PUNTER</span>
+        </h1>
+        <p
+          class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl"
+        >
+          Welcome to my website, I am a full stack developer & project manager
+          and here you'll find everything you need to know about me plus my
+          experiences and learnings are all published here too!
+        </p>
+        <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
+          <div class="rounded-md shadow">
+            <a
+              href="#"
+              class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
+            >
+              Get started
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div
       class="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8"
     >
@@ -52,8 +81,12 @@
               <div class="mt-6 flex items-center">
                 <div class="flex-shrink-0">
                   <a href="#">
-                    <span class="sr-only">Shay</span>
-                    <img class="h-10 w-10 rounded-full" src="#" alt="" />
+                    <span class="sr-only">{{ post.author_name }}</span>
+                    <img
+                      class="h-10 w-10 rounded-full"
+                      :src="$urlFor(post.authorImg)"
+                      alt=""
+                    />
                   </a>
                 </div>
                 <div class="ml-3">
@@ -62,7 +95,7 @@
                   </p>
                   <div class="flex space-x-1 text-sm text-gray-500">
                     <time :datetime="post.publishedAt">
-                      {{ post.publishedAt }}
+                      {{ post.publishedAt | moment }}
                     </time>
                   </div>
                 </div>
@@ -78,27 +111,20 @@
 <script>
 import { groq } from '@nuxtjs/sanity'
 import Main from '~/layout/main.vue'
+import moment from 'moment'
 
 export default {
+  filters: {
+    moment: function (date) {
+      return moment(date).format('Do MMM YYYY')
+    },
+  },
+
   async asyncData({ $sanity }) {
-    const query = groq`*[_type == "post"]`
+    const query = groq`*[_type == "post"]{title, "author_name": author->name, "authorImg": author->image, publishedAt, slug, mainImage{asset->{url}}, body}[0...5]`
     const posts = await $sanity.fetch(query)
-    console.log(posts[0].categories)
     return { posts }
   },
   components: { Main },
 }
 </script>
-
-<style>
-.container {
-  margin: 2rem;
-  min-height: 100vh;
-}
-.posts {
-  margin: 2rem 0;
-}
-.summary {
-  margin-top: 0.5rem;
-}
-</style>

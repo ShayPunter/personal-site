@@ -139,7 +139,6 @@ export default {
     },
   }}[0...5]`
     const post = await $sanity.fetch(query)
-    console.log(post)
     return { post }
   },
   components: { Main },
