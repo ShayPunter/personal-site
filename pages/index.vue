@@ -96,22 +96,26 @@
           </p>
         </div>
 
-        <div class="mt-20" v-for="experience in posts.expr">
-          <experience
-            :company="experience.company"
-            :role="experience.role"
-            :startDate="experience.startDate"
-            :endDate="experience.endDate"
-            :location="experience.location"
-            :url="$urlFor(experience.mainImage)"
-          >
-            <block-content
-              :blocks="child"
-              v-for="child in experience.body"
-              :key="child._id"
-            />
-          </experience>
-        </div>
+        <LazyHydrate when-visible>
+          <div>
+            <div class="mt-20" v-for="experience in posts.expr">
+              <experience
+                :company="experience.company"
+                :role="experience.role"
+                :startDate="experience.startDate"
+                :endDate="experience.endDate"
+                :location="experience.location"
+                :url="$urlFor(experience.mainImage)"
+              >
+                <block-content
+                  :blocks="child"
+                  v-for="child in experience.body"
+                  :key="child._id"
+                />
+              </experience>
+            </div>
+          </div>
+        </LazyHydrate>
       </div>
     </div>
 
@@ -132,19 +136,21 @@
         </div>
 
         <div class="mt-20">
-          <div class="mt-6 grid grid-cols-2 gap-0.5 md:grid-cols-3 lg:mt-8">
-            <div
-              class="col-span-1 flex justify-center py-8 px-8 bg-gray-50"
-              v-for="brand in posts.brands"
-            >
-              <img
-                class="max-h-20"
-                :src="$urlFor(brand.mainImage)"
-                :alt="brand.company"
-                loading="lazy"
-              />
+          <LazyHydrate when-visible>
+            <div class="mt-6 grid grid-cols-2 gap-0.5 md:grid-cols-3 lg:mt-8">
+              <div
+                class="col-span-1 flex justify-center py-8 px-8 bg-gray-50"
+                v-for="brand in posts.brands"
+              >
+                <img
+                  class="max-h-20"
+                  :src="$urlFor(brand.mainImage)"
+                  :alt="brand.company"
+                  loading="lazy"
+                />
+              </div>
             </div>
-          </div>
+          </LazyHydrate>
         </div>
       </div>
     </div>
@@ -164,61 +170,63 @@
             Learn from me / The blog
           </h2>
         </div>
-        <div
-          class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none"
-        >
+        <LazyHydrate when-visible>
           <div
-            v-for="post in posts.posts"
-            :key="post.title"
-            class="flex flex-col rounded-lg shadow-lg overflow-hidden"
+            class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none"
           >
-            <div class="flex-shrink-0">
-              <img
-                class="h-48 w-full object-cover"
-                :src="$urlFor(post.mainImage)"
-                alt="123456789"
-                loading="lazy"
-              />
-            </div>
-            <div class="flex-1 bg-white p-6 flex flex-col justify-between">
-              <div class="flex-1">
-                <a :href="'/blog/' + post.slug.current" class="block mt-2">
-                  <p class="text-xl font-semibold text-gray-900">
-                    {{ post.title }}
-                  </p>
-                  <p class="mt-3 text-base text-gray-500">
-                    <block-content
-                      :blocks="post.body[0]"
-                      v-bind:key="post.body[0]._id"
-                      v-if="post.body.length"
-                    />
-                  </p>
-                </a>
+            <div
+              v-for="post in posts.posts"
+              :key="post.title"
+              class="flex flex-col rounded-lg shadow-lg overflow-hidden"
+            >
+              <div class="flex-shrink-0">
+                <img
+                  class="h-48 w-full object-cover"
+                  :src="$urlFor(post.mainImage)"
+                  alt="123456789"
+                  loading="lazy"
+                />
               </div>
-              <div class="mt-6 flex items-center">
-                <div class="flex-shrink-0">
-                  <a href="#">
-                    <span class="sr-only">{{ post.author_name }}</span>
-                    <img
-                      class="h-10 w-10 rounded-full"
-                      :src="$urlFor(post.authorImg)"
-                      alt="123456789"
-                      loading="lazy"
-                    />
+              <div class="flex-1 bg-white p-6 flex flex-col justify-between">
+                <div class="flex-1">
+                  <a :href="'/blog/' + post.slug.current" class="block mt-2">
+                    <p class="text-xl font-semibold text-gray-900">
+                      {{ post.title }}
+                    </p>
+                    <p class="mt-3 text-base text-gray-500">
+                      <block-content
+                        :blocks="post.body[0]"
+                        v-bind:key="post.body[0]._id"
+                        v-if="post.body.length"
+                      />
+                    </p>
                   </a>
                 </div>
-                <div class="ml-3">
-                  <p class="text-sm font-medium text-gray-900">Shay</p>
-                  <div class="flex space-x-1 text-sm text-gray-500">
-                    <time :datetime="post.publishedAt">
-                      {{ post.publishedAt | moment }}
-                    </time>
+                <div class="mt-6 flex items-center">
+                  <div class="flex-shrink-0">
+                    <a href="#">
+                      <span class="sr-only">{{ post.author_name }}</span>
+                      <img
+                        class="h-10 w-10 rounded-full"
+                        :src="$urlFor(post.authorImg)"
+                        alt="123456789"
+                        loading="lazy"
+                      />
+                    </a>
+                  </div>
+                  <div class="ml-3">
+                    <p class="text-sm font-medium text-gray-900">Shay</p>
+                    <div class="flex space-x-1 text-sm text-gray-500">
+                      <time :datetime="post.publishedAt">
+                        {{ post.publishedAt | moment }}
+                      </time>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </LazyHydrate>
       </div>
     </div>
 
@@ -271,8 +279,13 @@
 import { groq } from '@nuxtjs/sanity'
 import moment from 'moment'
 import 'animate.css'
+import LazyHydrate from 'vue-lazy-hydration'
 
 export default {
+  components: {
+    LazyHydrate,
+  },
+
   mounted() {
     if (localStorage.getItem('visited') === 'true') {
       console.log("You've visited before")
