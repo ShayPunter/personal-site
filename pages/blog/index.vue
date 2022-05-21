@@ -1,5 +1,5 @@
 <template>
-  <Main>
+  <div>
     <!-- BLOG / LEARNING -->
     <div
       class="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8"
@@ -72,15 +72,16 @@
         </div>
       </div>
     </div>
-  </Main>
+  </div>
 </template>
 
 <script>
 import { groq } from '@nuxtjs/sanity'
 import moment from 'moment'
-import Main from '~/layout/main.vue'
 
 export default {
+  layout: 'main',
+
   filters: {
     moment: function (date) {
       return moment(date).format('Do MMM YYYY')
@@ -92,7 +93,5 @@ export default {
     const posts = await $sanity.fetch(postquery)
     return { posts }
   },
-
-  components: { Main },
 }
 </script>

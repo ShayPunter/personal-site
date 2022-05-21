@@ -1,5 +1,5 @@
 <template>
-  <Main>
+  <div>
     <div class="relative py-16 bg-white overflow-hidden">
       <div class="hidden lg:block lg:absolute lg:inset-y-0 lg:h-full lg:w-full">
         <div
@@ -121,14 +121,15 @@
         </div>
       </div>
     </div>
-  </Main>
+  </div>
 </template>
 
 <script>
 import { groq } from '@nuxtjs/sanity'
-import Main from '~/layout/main.vue'
 
 export default {
+  layout: 'main',
+
   async asyncData({ params, $sanity }) {
     const query = groq`*[_type == "post" && slug.current == "${params.slug}"][0]{ title,
   body[]{
@@ -141,22 +142,5 @@ export default {
     const post = await $sanity.fetch(query)
     return { post }
   },
-  components: { Main },
 }
 </script>
-
-<style>
-.container {
-  margin: 2rem;
-  min-height: 100vh;
-}
-
-.content {
-  margin: 2rem 0;
-  max-width: 38rem;
-}
-
-p {
-  margin: 1rem 0;
-}
-</style>
