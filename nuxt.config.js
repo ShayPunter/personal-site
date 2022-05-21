@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'blog',
+    title: 'Shay Punter',
     htmlAttrs: {
       lang: 'en',
     },
@@ -18,7 +18,7 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['animate.css/animate.min.css'],
+  css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: ['@/plugins/sanity-blocks.js', '@/plugins/sanity-image-builder.js'],
@@ -43,7 +43,11 @@ export default {
   content: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    filenames: {
+      chunk: () => '[name].js',
+    } /* chunk: () => '[name]_[contenthash].js' */,
+  },
 
   sanity: {
     projectId: 'ul94kzl8',

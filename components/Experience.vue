@@ -42,10 +42,7 @@ export default {
       type: String,
       required: true,
     },
-    endDate: {
-      type: String,
-      required: true,
-    },
+    endDate,
     location: {
       type: String,
       required: true,
