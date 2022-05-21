@@ -2,7 +2,7 @@
 <template>
   <div class="grid gap-8 grid-cols-3">
     <div>
-      <img :src="url" alt="" />
+      <img :src="url" :alt="company" loading="lazy" />
     </div>
     <div class="col-span-2">
       <h2 class="font-bold text-3xl text-blue-700">{{ company }}</h2>
