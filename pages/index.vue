@@ -85,7 +85,7 @@
       <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
         <div class="text-center">
           <h2
-            class="text-base font-semibold text-indigo-600 tracking-wide uppercase"
+            class="text-base font-semibold text-blue-600 tracking-wide uppercase"
           >
             Experience
           </h2>
@@ -110,13 +110,40 @@
               v-for="child in experience.body"
               :key="child._id"
             />
-
-            <!-- <block-content
-              :blocks="experience.body"
-              v-bind:key="experience.body._id"
-              v-if="experience.body.length"
-            /> -->
           </experience>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOGO CLOUD -->
+    <div class="bg-white">
+      <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h3
+            class="text-base font-semibold text-blue-600 tracking-wide uppercase"
+          >
+            Providing a result-focused service
+          </h3>
+          <p
+            class="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl"
+          >
+            Brands Shay has worked with
+          </p>
+        </div>
+
+        <div class="mt-20">
+          <div class="mt-6 grid grid-cols-2 gap-0.5 md:grid-cols-3 lg:mt-8">
+            <div
+              class="col-span-1 flex justify-center py-8 px-8 bg-gray-50"
+              v-for="brand in posts.brands"
+            >
+              <img
+                class="max-h-14"
+                :src="$urlFor(brand.mainImage)"
+                :alt="brand.company"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -208,6 +235,7 @@ export default {
       document.getElementById('loader').remove()
       return
     }
+    /* Probably a better way of doing this */
     document.body.style.overflowY = 'hidden'
     setTimeout(() => {
       document.getElementById('loader-h1').classList.remove('hidden')
@@ -254,7 +282,8 @@ export default {
       ...,
       "_key": _id
     },
-  }}[0...5] }`
+  }}[0...5],
+  "brands": *[_type == "brands"]{company, mainImage{asset->{url}}}[0...6]}`
     const posts = await $sanity.fetch(postquery)
     console.log(posts)
     return { posts }

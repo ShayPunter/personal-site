@@ -24,6 +24,7 @@ import moment from 'moment'
 export default {
   filters: {
     moment: function (date) {
+      if (date === null) return 'current'
       return moment(date).format('MMM YYYY')
     },
   },
