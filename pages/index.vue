@@ -237,14 +237,14 @@
                 id="contact-heading"
                 class="text-2xl font-extrabold text-warm-gray-900 sm:text-3xl"
               >
-                Get in touch
+                Lets have a chat
               </h2>
               <div
                 class="mt-8 grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-12 lg:mt-0 lg:col-span-2"
               >
                 <div>
                   <h3 class="text-lg font-medium text-warm-gray-900">
-                    Lets connect, pop over an email
+                    Via email
                   </h3>
                   <dl class="mt-2 text-base text-warm-gray-500">
                     <div>
