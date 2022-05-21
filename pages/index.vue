@@ -24,7 +24,7 @@
       id="slideup"
       class="flex relative h-screen mx-auto bg-gray-900 animate__animated"
     >
-      <div class="m-auto">
+      <div class="sm:m-auto mx-8">
         <div class="align-center text-center">
           <h1
             class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl"
@@ -41,16 +41,16 @@
           <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
             <div class="rounded-md shadow">
               <a
-                href="#"
+                href="/portfolio"
                 class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-700 hover:bg-blue-800 md:py-4 md:text-lg md:px-10"
               >
                 View my work
               </a>
             </div>
 
-            <div class="ml-4 rounded-md shadow">
+            <div class="mt-4 sm:ml-4 sm:mt-0 rounded-md shadow">
               <a
-                href="#"
+                href="/blog"
                 class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-700 hover:bg-gray-800 md:py-4 md:text-lg md:px-10"
               >
                 View the blog
@@ -141,6 +141,7 @@
                 class="max-h-14"
                 :src="$urlFor(brand.mainImage)"
                 :alt="brand.company"
+                loading="lazy"
               />
             </div>
           </div>
@@ -181,7 +182,7 @@
             </div>
             <div class="flex-1 bg-white p-6 flex flex-col justify-between">
               <div class="flex-1">
-                <a :href="post.slug.current" class="block mt-2">
+                <a :href="'/blog/' + post.slug.current" class="block mt-2">
                   <p class="text-xl font-semibold text-gray-900">
                     {{ post.title }}
                   </p>
@@ -328,7 +329,6 @@ export default {
   }}[0...5],
   "brands": *[_type == "brands"]{company, mainImage{asset->{url}}}[0...6]}`
     const posts = await $sanity.fetch(postquery)
-    console.log(posts)
     return { posts }
   },
 }

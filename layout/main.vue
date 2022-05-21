@@ -135,10 +135,10 @@ export default {
   data() {
     return {
       nav: [
-        { name: 'Solutions', href: '#' },
-        { name: 'Pricing', href: '#' },
-        { name: 'Docs', href: '#' },
-        { name: 'Company', href: '#' },
+        { name: 'Home', href: '/' },
+        { name: 'Portfolio', href: '/portfolio' },
+        { name: 'Blog', href: '/blog' },
+        { name: 'Hire me', href: '#' },
       ],
     }
   },
