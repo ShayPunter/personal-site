@@ -1,29 +1,57 @@
 <template>
-  <Main>
-    <div class="mt-16 mx-auto max-w-7xl px-4 sm:mt-24">
-      <div class="text-center">
+  <div>
+    <div
+      id="loader"
+      class="animate__animated loader z-10 flex h-screen mx-auto bg-gray-800 transition-all animate__fast"
+    >
+      <div class="m-auto">
         <h1
-          class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl"
+          id="loader-h1"
+          class="animate__animated hidden text-4xl tracking-tight font-extrabold text-white"
         >
-          <span class="block xl:inline">The home of</span>
-          <br />
-          <span class="block text-gray-900 xl:inline">SHAY PUNTER</span>
+          SHAY PUNTER
         </h1>
         <p
-          class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl"
+          id="loader-p"
+          class="animate__animated z-0 hidden text-center text-md mt-2 tracking-tight text-white"
         >
-          Welcome to my website, I am a full stack developer & project manager
-          and here you'll find everything you need to know about me plus my
-          experiences and learnings are all published here too!
+          Landing shortly...
         </p>
-        <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
-          <div class="rounded-md shadow">
-            <a
-              href="#"
-              class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
+      </div>
+    </div>
+
+    <div
+      id="slideup"
+      class="flex h-screen mx-auto bg-gray-900 animate__animated"
+    >
+      <div class="m-auto">
+        <div class="align-center text-center">
+          <h1
+            class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl"
+          >
+            <span class="block xl:inline">The home of</span>
+            <br />
+            <span
+              class="animate__animated animate__bounce block text-white xl:inline"
+              >SHAY PUNTER</span
             >
-              Get started
-            </a>
+          </h1>
+          <p
+            class="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl"
+          >
+            Welcome to my website, I am a full stack developer & project manager
+            and here you'll find everything you need to know about me plus my
+            experiences and learnings are all published here too!
+          </p>
+          <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
+            <div class="rounded-md shadow">
+              <a
+                href="#"
+                class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
+              >
+                Explore
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -42,10 +70,6 @@
           >
             From the blog
           </h2>
-          <p class="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa
-            libero labore natus atque, ducimus sed.
-          </p>
         </div>
         <div
           class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none"
@@ -59,7 +83,7 @@
               <img
                 class="h-48 w-full object-cover"
                 :src="$urlFor(post.mainImage)"
-                alt=""
+                alt="123456789"
                 loading="lazy"
               />
             </div>
@@ -85,7 +109,8 @@
                     <img
                       class="h-10 w-10 rounded-full"
                       :src="$urlFor(post.authorImg)"
-                      alt=""
+                      alt="123456789"
+                      loading="lazy"
                     />
                   </a>
                 </div>
@@ -105,15 +130,53 @@
         </div>
       </div>
     </div>
-  </Main>
+  </div>
 </template>
 
 <script>
 import { groq } from '@nuxtjs/sanity'
 import Main from '~/layout/main.vue'
 import moment from 'moment'
+import 'animate.css'
 
 export default {
+  mounted() {
+    document.body.style.overflowY = 'hidden'
+    setTimeout(() => {
+      document.getElementById('loader-h1').classList.remove('hidden')
+      document.getElementById('loader-h1').classList.add('animate__fadeInUp')
+    }, 150)
+
+    setTimeout(() => {
+      document.getElementById('loader-p').classList.remove('hidden')
+      document.getElementById('loader-p').classList.add('animate__fadeInUp')
+    }, 800)
+
+    setTimeout(function () {
+      document.getElementById('loader-h1').classList.add('animate__fadeOutUp')
+
+      // Fade out the lower text
+      setTimeout(() => {
+        document.getElementById('loader-p').classList.add('animate__fadeOutUp')
+      }, 500)
+
+      // Slide up the content & remove
+      setTimeout(() => {
+        document.getElementById('slideup').classList.add('animate__slideOutUpp')
+        setTimeout(() => {
+          document
+            .getElementById('slideup')
+            .classList.remove('animate__slideOutUpp')
+        }, 1200)
+
+        setTimeout(() => {
+          document.getElementById('loader').remove()
+          document.body.style.overflowY = 'auto'
+        }, 1200)
+      }, 1800)
+    }, 3000)
+  },
+
   filters: {
     moment: function (date) {
       return moment(date).format('Do MMM YYYY')
@@ -128,3 +191,38 @@ export default {
   components: { Main },
 }
 </script>
+
+<style scope>
+.hidden {
+  display: none;
+}
+
+@-webkit-keyframes slideOutUpp {
+  0% {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
+  to {
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+@keyframes slideOutUpp {
+  0% {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
+  to {
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+.animate__slideOutUpp {
+  -webkit-animation-name: slideOutUpp;
+  animation-name: slideOutUpp;
+}
+</style>
