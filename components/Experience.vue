@@ -7,7 +7,7 @@
     <div class="col-span-2">
       <h2 class="font-bold text-3xl text-blue-700">{{ company }}</h2>
       <p class="text-blue-900 my-1">
-        {{ role }}| {{ startDate | moment }} - {{ endDate | moment }}
+        {{ role }} | {{ startDate | moment }} - {{ endDate | moment }}
       </p>
       <p class="font-bold">{{ location }}</p>
       <div class="mt-4">
@@ -24,7 +24,7 @@ import moment from 'moment'
 export default {
   filters: {
     moment: function (date) {
-      if (date === null) return 'current'
+      if (date === 'current') return 'Current'
       return moment(date).format('MMM YYYY')
     },
   },
@@ -42,7 +42,11 @@ export default {
       type: String,
       required: true,
     },
-    endDate,
+    endDate: {
+      type: String,
+      required: false,
+      default: 'current',
+    },
     location: {
       type: String,
       required: true,

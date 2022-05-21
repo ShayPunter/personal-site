@@ -220,6 +220,49 @@
         </div>
       </div>
     </div>
+
+    <!-- GET IN TOUCH -->
+    <div class="bg-white">
+      <!-- Side-by-side grid -->
+      <div class="bg-white">
+        <div
+          class="max-w-md mx-auto py-24 px-4 sm:max-w-3xl sm:py-32 sm:px-6 lg:max-w-7xl lg:px-8"
+        >
+          <div class="divide-y divide-warm-gray-200">
+            <section
+              class="lg:grid lg:grid-cols-3 lg:gap-8"
+              aria-labelledby="contact-heading"
+            >
+              <h2
+                id="contact-heading"
+                class="text-2xl font-extrabold text-warm-gray-900 sm:text-3xl"
+              >
+                Get in touch
+              </h2>
+              <div
+                class="mt-8 grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-12 lg:mt-0 lg:col-span-2"
+              >
+                <div>
+                  <h3 class="text-lg font-medium text-warm-gray-900">
+                    Lets connect, pop over an email
+                  </h3>
+                  <dl class="mt-2 text-base text-warm-gray-500">
+                    <div>
+                      <dt class="sr-only">Email</dt>
+                      <dd>
+                        <a href="mailto:shay@shaypunter.co.uk"
+                          >shay@shaypunter.co.uk</a
+                        >
+                      </dd>
+                    </div>
+                  </dl>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
