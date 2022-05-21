@@ -24,7 +24,7 @@
       id="slideup"
       class="flex relative h-screen mx-auto bg-gray-900 animate__animated"
     >
-      <div class="sm:m-auto mx-8">
+      <div class="my-auto mx-8 sm:mx-auto">
         <div class="align-center text-center">
           <h1
             class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl"
@@ -138,7 +138,7 @@
               v-for="brand in posts.brands"
             >
               <img
-                class="max-h-14"
+                class="max-h-20"
                 :src="$urlFor(brand.mainImage)"
                 :alt="brand.company"
                 loading="lazy"
