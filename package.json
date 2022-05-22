@@ -3,18 +3,16 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate",
+    "dev": "nuxi dev",
+    "build": "nuxi build",
+    "start": "nuxt preview",
     "lint:prettier": "prettier --check .",
     "lint": "yarn lint:prettier",
     "lintfix": "prettier --write --list-different ."
   },
   "dependencies": {
     "@heroicons/vue": "^1.0.6",
-    "@nuxt/content": "^1.15.1",
-    "@nuxtjs/sanity": "0.10.0",
+    "@nuxtjs/sanity": "^1.2.1",
     "@nuxtjs/tailwindcss": "^4.2.1",
     "@sanity/client": "^3.3.0",
     "@sanity/image-url": "^1.0.1",
@@ -22,15 +20,17 @@
     "animate.css": "^4.1.1",
     "core-js": "^3.19.3",
     "moment": "^2.29.3",
-    "nuxt": "^2.15.8",
+    "nuxt-edge": "latest",
     "sanity-blocks-vue-component": "0.1.0",
     "vue": "^2.6.14",
+    "vue-demi": "^0.12.5",
     "vue-lazy-hydration": "^2.0.0-beta.4",
     "vue-server-renderer": "^2.6.14",
     "vue-template-compiler": "^2.6.14",
     "webpack": "^4.46.0"
   },
   "devDependencies": {
+    "@nuxt/bridge": "npm:@nuxt/bridge-edge",
     "eslint-config-prettier": "^8.3.0",
     "postcss": "^8.4.4",
     "prettier": "^2.5.1"

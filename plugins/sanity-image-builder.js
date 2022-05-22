@@ -1,9 +1,11 @@
 import imageUrlBuilder from '@sanity/image-url'
 
-export default ({ $sanity }, inject) => {
-  const builder = imageUrlBuilder($sanity.config)
+export default defineNuxtPlugin(() => {
+  const builder = imageUrlBuilder(useSanity().config)
   function urlFor(source) {
     return builder.image(source).auto('format')
   }
-  inject('urlFor', urlFor)
-}
+  return {
+    provide: { urlFor },
+  }
+})

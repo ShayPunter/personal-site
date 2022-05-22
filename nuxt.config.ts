@@ -1,4 +1,6 @@
-export default {
+import { defineNuxtConfig } from '@nuxt/bridge'
+
+export default defineNuxtConfig({
   // Target: https://go.nuxtjs.dev/config-target
   target: 'server',
 
@@ -30,27 +32,27 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/sanity/module',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/content
-    '@nuxt/content',
+    '@nuxtjs/sanity',
   ],
 
   // Content module configuration: https://go.nuxtjs.dev/config-content
   content: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-    filenames: {
-      chunk: () => '[name].js',
-    } /* chunk: () => '[name]_[contenthash].js' */,
-  },
+  build: {},
 
-  sanity: {
-    projectId: 'ul94kzl8',
-    useCdn: true,
+  runtimeConfig: {
+    public: {
+      sanity: {
+        projectId: 'ul94kzl8',
+        useCdn: true,
+        globalHelper: true,
+      },
+    },
   },
-}
+})

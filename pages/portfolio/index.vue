@@ -75,12 +75,6 @@
   </div>
 </template>
 
-<!-- <script setup>
-const query = groq`{ "posts": *[_type == "post"]{title, "author_name": author->name, "authorImg": author->image, publishedAt, slug, mainImage{asset->{url}}, body}[0...10]}`
-const sanity = useSanity();
-const { posts } = await useAsyncData('posts',)
-</script> -->
-
 <script>
 // import { groq } from '@nuxtjs/sanity'
 import moment from 'moment'
@@ -94,10 +88,10 @@ export default {
     },
   },
 
-  async asyncData({ $sanity }) {
-    const postquery = groq`{ "posts": *[_type == "post"]{title, "author_name": author->name, "authorImg": author->image, publishedAt, slug, mainImage{asset->{url}}, body}[0...10]}`
-    const posts = await useSanity().fetch(postquery)
-    return { posts }
-  },
+  // async asyncData({ $sanity }) {
+  //   const postquery = groq`{ "posts": *[_type == "portfolio"]{title, "author_name": author->name, "authorImg": author->image, publishedAt, slug, mainImage{asset->{url}}, body}[0...10]}`
+  //   const posts = await $sanity.fetch(postquery)
+  //   return { posts }
+  // },
 }
 </script>

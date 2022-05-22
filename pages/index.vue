@@ -280,15 +280,91 @@
   </div>
 </template>
 
+<script setup>
+onBeforeMount(async () => {
+  // const query = groq`{ "posts": *[_type == "post"]{title, "author_name": author->name, "authorImg": author->image, publishedAt, slug, mainImage{asset->{url}}, body}[0...6]}`
+
+  // const queryexpr = groq`{ "expr": *[_type == "experience"]{company, role, mainImage{asset->{url}}, startDate, endDate, location, body[]{
+  //   ...,
+  //   asset->{
+  //     ...,
+  //     "_key": _id
+  //   },
+  // }}[0...5]}`
+
+  // const querybrands = groq`{"brands": *[_type == "brands"]{company, mainImage{asset->{url}}}[0...6]}`
+
+  const postquery = groq`{ "posts": *[_type == "post"]{title, "author_name": author->name, "authorImg": author->image, publishedAt, slug, mainImage{asset->{url}}, body}[0...6],
+                              "expr": *[_type == "experience"]{company, role, mainImage{asset->{url}}, startDate, endDate, location, body[]{
+    ...,
+    asset->{
+      ...,
+      "_key": _id
+    },
+  }}[0...5],
+  "brands": *[_type == "brands"]{company, mainImage{asset->{url}}}[0...6]}`
+
+  console.log('Hello')
+  const { data: posts } = useLazySanityQuery(postquery)
+  console.log(useLazySanityQuery(postquery))
+  console.log(posts)
+  // const { data: posts, refresh } = useSanity().fetch(postquery)
+  // const { data: posts } = await useSanity().fetch(query)
+  // const { data: expr } = await useSanity().fetch(queryexpr)
+  // const { data: brands } = await useSanity().fetch(querybrands)
+  // console.log(posts)
+  // console.log(expr)
+  // console.log(brands)
+})
+
+// const posts = await useSanity().fetch(postquery)
+// console.log('reeeee')
+// console.log(posts)
+// return { posts }
+
+// const postquery = groq`{ "posts": *[_type == "post"]{title, "author_name": author->name, "authorImg": author->image, publishedAt, slug, mainImage{asset->{url}}, body}[0...6],
+//                               "expr": *[_type == "experience"]{company, role, mainImage{asset->{url}}, startDate, endDate, location, body[]{
+//     ...,
+//     asset->{
+//       ...,
+//       "_key": _id
+//     },
+//   }}[0...5],
+//   "brands": *[_type == "brands"]{company, mainImage{asset->{url}}}[0...6]}`
+
+// const { posts, refresh } = useLazySanityQuery(postquery, { topic: 'posts' })
+// onBeforeMount(async () => {
+//   const postquery = groq`{ "posts": *[_type == "post"]{title, "author_name": author->name, "authorImg": author->image, publishedAt, slug, mainImage{asset->{url}}, body}[0...6],
+//                               "expr": *[_type == "experience"]{company, role, mainImage{asset->{url}}, startDate, endDate, location, body[]{
+//     ...,
+//     asset->{
+//       ...,
+//       "_key": _id
+//     },
+//   }}[0...5],
+//   "brands": *[_type == "brands"]{company, mainImage{asset->{url}}}[0...6]}`
+//   const postss = await useSanity().fetch(postquery)
+//   console.log(postss)
+//   console.log('posts: ' + this.posts)
+//   this.$set(this.posts, postss)
+// })
+</script>
+
 <script>
-import { groq } from '@nuxtjs/sanity'
 import moment from 'moment'
 import 'animate.css'
 import LazyHydrate from 'vue-lazy-hydration'
+import Vue from 'vue'
 
 export default {
   components: {
     LazyHydrate,
+  },
+
+  data() {
+    return {
+      posts: {},
+    }
   },
 
   mounted() {
@@ -336,19 +412,25 @@ export default {
     },
   },
 
-  async asyncData({ $sanity }) {
-    const postquery = groq`{ "posts": *[_type == "post"]{title, "author_name": author->name, "authorImg": author->image, publishedAt, slug, mainImage{asset->{url}}, body}[0...6],
-                              "expr": *[_type == "experience"]{company, role, mainImage{asset->{url}}, startDate, endDate, location, body[]{
-    ..., 
-    asset->{
-      ...,
-      "_key": _id
-    },
-  }}[0...5],
-  "brands": *[_type == "brands"]{company, mainImage{asset->{url}}}[0...6]}`
-    const posts = await $sanity.fetch(postquery)
-    return { posts }
-  },
+  // async useAsyncData({ $sanity }) {
+  //   const query = groq`{ "posts": *[_type == "post"]{title, "author_name": author->name, "authorImg": author->image, publishedAt, slug, mainImage{asset->{url}}, body}[0...6]}`
+
+  //   const queryexpr = groq`{ "expr": *[_type == "experience"]{company, role, mainImage{asset->{url}}, startDate, endDate, location, body[]{
+  //   ...,
+  //   asset->{
+  //     ...,
+  //     "_key": _id
+  //   },
+  // }}[0...5]}`
+
+  //   const querybrands = groq`{"brands": *[_type == "brands"]{company, mainImage{asset->{url}}}[0...6]}`
+
+  //   console.log('Hello')
+  //   const { posts } = await useSanity().fetch(query)
+  //   const { expr } = await useSanity().fetch(queryexpr)
+  //   const { brands } = await useSanity().fetch(querybrands)
+  //   return { expr }
+  // },
 }
 </script>
 
