@@ -11,26 +11,26 @@
               <span class="sr-only">Shay Punter</span>
             </a>
             <div class="hidden ml-10 space-x-8 lg:block">
-              <a
+              <NuxtLink
                 v-for="link in nav"
                 :key="link.name"
-                :href="link.href"
+                :to="link.href"
                 class="text-base font-medium text-white hover:text-indigo-50"
               >
                 {{ link.name }}
-              </a>
+              </NuxtLink>
             </div>
           </div>
         </div>
         <div class="py-4 flex flex-wrap justify-center space-x-6 lg:hidden">
-          <a
+          <NuxtLink
             v-for="link in nav"
             :key="link.name"
-            :href="link.href"
+            :to="link.href"
             class="text-base font-medium text-white hover:text-indigo-50"
           >
             {{ link.name }}
-          </a>
+          </NuxtLink>
         </div>
       </nav>
     </header>

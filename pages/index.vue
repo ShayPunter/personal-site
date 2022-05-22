@@ -40,21 +40,21 @@
           </p>
           <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
             <div class="rounded-md shadow">
-              <a
-                href="/portfolio"
+              <NuxtLink
+                to="/portfolio"
                 class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-700 hover:bg-blue-800 md:py-4 md:text-lg md:px-10"
               >
                 View my work
-              </a>
+              </NuxtLink>
             </div>
 
             <div class="mt-4 sm:ml-4 sm:mt-0 rounded-md shadow">
-              <a
-                href="/blog"
+              <NuxtLink
+                to="/blog"
                 class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-700 hover:bg-gray-800 md:py-4 md:text-lg md:px-10"
               >
                 View the blog
-              </a>
+              </NuxtLink>
             </div>
           </div>
         </div>
@@ -191,7 +191,10 @@
               </div>
               <div class="flex-1 bg-white p-6 flex flex-col justify-between">
                 <div class="flex-1">
-                  <a :href="'/blog/' + post.slug.current" class="block mt-2">
+                  <NuxtLink
+                    :to="'/blog/' + post.slug.current"
+                    class="block mt-2"
+                  >
                     <p class="text-xl font-semibold text-gray-900">
                       {{ post.title }}
                     </p>
@@ -202,7 +205,7 @@
                         v-if="post.body.length"
                       />
                     </p>
-                  </a>
+                  </NuxtLink>
                 </div>
                 <div class="mt-6 flex items-center">
                   <div class="flex-shrink-0">
