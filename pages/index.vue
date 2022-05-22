@@ -147,6 +147,8 @@
                   :src="$urlFor(brand.mainImage)"
                   :alt="brand.company"
                   loading="lazy"
+                  width="142"
+                  height="80"
                 />
               </div>
             </div>
@@ -288,8 +290,8 @@ export default {
 
   mounted() {
     if (localStorage.getItem('visited') === 'true') {
-      console.log("You've visited before")
       document.getElementById('loader').remove()
+      window.scrollTo(0, 0)
       return
     }
     /* Probably a better way of doing this */
