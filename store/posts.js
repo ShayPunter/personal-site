@@ -4,12 +4,12 @@ export const usePostsStore = defineStore('posts', {
 	id: 'posts',
 	state: () => ({
 		_posts: {},
-		_post: null,
+		_singlepost: {},
 	}),
 
 	getters: {
 		posts: (state) => state._posts,
-		post: (state) => state._post,
+		singlepost: (state) => state._singlepost,
 	},
 
 	actions: {
@@ -20,17 +20,10 @@ export const usePostsStore = defineStore('posts', {
 			this._posts = results.data;
 		},
 
-		async fetchPost(slugg) {
-			this._post = null;
-			// const query = groq`*[_type == "post" && slug.current == "${slugg}"][0]{ title, body[]{
-			// 	...,
-			// 	asset->{
-			// 	  ...,
-			// 	  "_key": _id
-			// 	},
-			//   } }`;
-
-			const query = groq`*[_type == "post" && slug.current == "${slugg}"][0]{ title, body[]{
+		async fetchPost() {
+			const route = useRoute();
+			this._singlepost = {};
+			const query = groq`*[_type == "post" && slug.current == "${route.params.slug}"][0]{ title, body[]{
 							..., 
 							asset->{
 							  ...,
@@ -38,8 +31,7 @@ export const usePostsStore = defineStore('posts', {
 							},
 						  } }`;
 
-			const results = useSanityQuery(query);
-			this._post = results.data;
+			this._singlepost = useSanityQuery(query).data;
 		},
 	},
 });

@@ -6,10 +6,10 @@
 					class="w-full py-6 flex items-center justify-between border-b border-gray-800 lg:border-none"
 				>
 					<div class="flex items-center">
-						<NuxtLink to="/">
+						<a href="/">
 							<p class="uppercase font-bold text-3xl text-white">Shay Punter</p>
 							<span class="sr-only">Shay Punter</span>
-						</NuxtLink>
+						</a>
 						<div class="hidden-mobile ml-10 space-x-8 lg:block">
 							<NuxtLink
 								v-for="link in nav"
@@ -96,7 +96,6 @@
 		data() {
 			return {
 				nav: [
-					{ name: 'Home', href: '/' },
 					{ name: 'Portfolio', href: '/portfolio' },
 					{ name: 'Blog', href: '/blog' },
 					{ name: 'Hire me', href: '#' },

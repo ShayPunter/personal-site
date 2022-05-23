@@ -53,8 +53,6 @@
 	const { fetchPosts } = usePostsStore();
 
 	fetchPosts();
-
-	console.log(posts);
 </script>
 
 <script>

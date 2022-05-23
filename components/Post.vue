@@ -17,12 +17,14 @@
 				<NuxtLink
 					:to="'/blog/' + slug"
 					class="block mt-2 text-xl font-semibold text-gray-900"
+					:key="slug"
 				>
 					{{ title }}
 				</NuxtLink>
 				<NuxtLink
 					:to="'/blog/' + slug"
 					class="block mt-2 mt-3 text-base text-gray-500"
+					:key="slug"
 				>
 					{{ body }}
 				</NuxtLink>

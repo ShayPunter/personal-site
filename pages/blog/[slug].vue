@@ -8,11 +8,11 @@
 							<h1
 								class="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl"
 							>
-								{{ post.title }}
+								{{ singlepost.title }}
 							</h1>
 						</div>
 						<div class="mt-6 prose prose-indigo prose-lg text-gray-500 mx-auto">
-							<SanityContent :blocks="post.body" />
+							<SanityContent :blocks="singlepost.body" />
 						</div>
 					</div>
 				</template>
@@ -28,12 +28,11 @@
 	import { storeToRefs } from 'pinia';
 	import { usePostsStore } from '@/store/posts';
 
-	const route = useRoute();
-	const { post } = storeToRefs(usePostsStore());
+	const { singlepost } = storeToRefs(usePostsStore());
 	const { fetchPost } = usePostsStore();
 
-	fetchPost(route.params.slug);
-	console.log(post);
+	fetchPost();
+	console.log(singlepost);
 </script>
 
 <script>
