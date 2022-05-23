@@ -35,7 +35,7 @@
       </nav>
     </header>
 
-    <Nuxt />
+    <slot></slot>
 
     <footer class="bg-white">
       <div
