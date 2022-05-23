@@ -58,10 +58,6 @@
 <script>
 	export default {
 		name: 'blog-page',
-		transition: {
-			name: 'test',
-			mode: 'out-in',
-		},
 
 		filters: {
 			formatDate: (dateStr) =>

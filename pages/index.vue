@@ -273,10 +273,6 @@
 
 	export default {
 		name: 'index',
-		transition: {
-			name: 'test',
-			mode: 'out-in',
-		},
 
 		mounted() {
 			window.scrollTo(0, 0);

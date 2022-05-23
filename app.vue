@@ -4,6 +4,15 @@
 	</div>
 </template>
 
+<script>
+	export default {
+		transition: {
+			name: 'test',
+			mode: 'out-in',
+		},
+	};
+</script>
+
 <style>
 	.page-enter-active,
 	.page-leave-active {

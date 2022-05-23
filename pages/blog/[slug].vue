@@ -38,9 +38,5 @@
 <script>
 	export default {
 		name: 'blog-article',
-		transition: {
-			name: 'test',
-			mode: 'out-in',
-		},
 	};
 </script>
