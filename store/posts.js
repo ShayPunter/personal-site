@@ -22,14 +22,21 @@ export const usePostsStore = defineStore('posts', {
 
 		async fetchPost(slugg) {
 			this._post = null;
-			const query = groq`*[_type == "post" && slug.current == "${slugg}"][0]{ title,
-				body[]{
-				  ..., 
-				  asset->{
-					...,
-					"_key": _id
-				  },
-				}}`;
+			// const query = groq`*[_type == "post" && slug.current == "${slugg}"][0]{ title, body[]{
+			// 	...,
+			// 	asset->{
+			// 	  ...,
+			// 	  "_key": _id
+			// 	},
+			//   } }`;
+
+			const query = groq`*[_type == "post" && slug.current == "${slugg}"][0]{ title, body[]{
+							..., 
+							asset->{
+							  ...,
+							  "_key": _id
+							},
+						  } }`;
 
 			const results = useSanityQuery(query);
 			this._post = results.data;

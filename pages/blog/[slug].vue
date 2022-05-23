@@ -33,4 +33,15 @@
 	const { fetchPost } = usePostsStore();
 
 	fetchPost(route.params.slug);
+	console.log(post);
+</script>
+
+<script>
+	export default {
+		name: 'blog-article',
+		transition: {
+			name: 'test',
+			mode: 'out-in',
+		},
+	};
 </script>
