@@ -9,11 +9,14 @@
 	"dependencies": {
 		"@nuxtjs/sanity": "^1.2.1",
 		"@nuxtjs/tailwindcss": "^5.0.4",
+		"@pinia/nuxt": "^0.1.9",
 		"@sanity/client": "^3.3.0",
 		"@sanity/image-url": "^1.0.1",
 		"@tailwindcss/typography": "^0.5.2",
 		"animate.css": "^4.1.1",
+		"motion": "^10.8.3",
 		"nuxt": "3.0.0-rc.3",
+		"pinia": "^2.0.14",
 		"sanity-blocks-vue-component": "^1.0.1"
 	},
 	"devDependencies": {

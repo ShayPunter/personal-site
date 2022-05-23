@@ -2,7 +2,7 @@
 <template>
 	<div class="grid gap-8 grid-cols-1 sm:grid-cols-3">
 		<div>
-			<img :src="url" :alt="company" loading="lazy" />
+			<SanityImage :asset-id="url.asset._ref" auto="format" loading="lazy" />
 		</div>
 		<div class="col-span-2">
 			<h2 class="font-bold text-3xl text-blue-700">{{ company }}</h2>
@@ -19,16 +19,7 @@
 </template>
 
 <script>
-	// import moment from 'moment'
-
 	export default {
-		// filters: {
-		//   moment: function (date) {
-		//     if (date === 'current') return 'Current'
-		//     return moment(date).format('MMM YYYY')
-		//   },
-		// },
-
 		props: {
 			company: {
 				type: String,

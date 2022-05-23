@@ -97,18 +97,25 @@
 				</div>
 
 				<div>
-					<div class="mt-20" v-for="experience in data.experience">
-						<experience
-							:company="experience.company"
-							:role="experience.role"
-							:startDate="experience.startDate"
-							:endDate="experience.endDate"
-							:location="experience.location"
-							:url="$urlFor(experience.mainImage)"
-						>
-							<SanityContent :blocks="experience.body" />
-						</experience>
-					</div>
+					<suspense>
+						<template #default>
+							<div class="mt-20" v-for="experienc in experience">
+								<Experience
+									:company="experienc.company"
+									:role="experienc.role"
+									:startDate="experienc.startDate"
+									:endDate="experienc.endDate"
+									:location="experienc.location"
+									:url="experienc.mainImage"
+								>
+									<SanityContent :blocks="experienc.body" />
+								</Experience>
+							</div>
+						</template>
+						<template #fallback>
+							<p>Loading experience...</p>
+						</template>
+					</suspense>
 				</div>
 			</div>
 		</div>
@@ -131,18 +138,25 @@
 
 				<div class="mt-20">
 					<div class="mt-6 grid grid-cols-2 gap-0.5 md:grid-cols-3 lg:mt-8">
-						<div
-							class="col-span-1 flex justify-center py-8 px-8 bg-gray-50"
-							v-for="brand in data.brands"
-						>
-							<img
-								class="max-h-20"
-								:src="$urlFor(brand.mainImage)"
-								:alt="brand.company"
-								width="142"
-								height="80"
-							/>
-						</div>
+						<suspense>
+							<template #default>
+								<div
+									class="col-span-1 flex justify-center py-8 px-8 bg-gray-50"
+									v-for="brand in brands"
+								>
+									<SanityImage
+										:asset-id="brand.mainImage.asset._ref"
+										auto="format"
+										:alt="brand.company"
+										width="142"
+										height="80"
+									/>
+								</div>
+							</template>
+							<template #fallback>
+								<p>Loading brands...</p>
+							</template>
+						</suspense>
 					</div>
 				</div>
 			</div>
@@ -166,57 +180,27 @@
 				<div
 					class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none"
 				>
-					<div
-						v-for="post in data.post"
-						:key="post._id"
-						class="flex flex-col rounded-lg shadow-lg overflow-hidden"
-					>
-						<div class="flex-shrink-0">
-							<img
-								class="h-48 w-full object-cover"
-								:src="$urlFor(post.mainImage)"
-								alt="123456789"
-								loading="lazy"
-							/>
-						</div>
-						<div class="flex-1 bg-white p-6 flex flex-col justify-between">
-							<div class="flex-1">
-								<NuxtLink
-									:to="'/blog/' + post.slug.current"
-									class="block mt-2 text-xl font-semibold text-gray-900"
-								>
-									{{ post.title }}
-								</NuxtLink>
-								<NuxtLink
-									:to="'/blog/' + post.slug.current"
-									class="block mt-2 mt-3 text-base text-gray-500"
-								>
-									<div v-if="post.body.length">
-										{{ post.body[0].children[0].text }}
-									</div>
-								</NuxtLink>
+					<suspense>
+						<template #default>
+							<div v-for="post in posts" v-if="posts">
+								<Post
+									:title="post.title"
+									:publishedAt="post.publishedAt"
+									:image="post.mainImage.asset._ref"
+									:author_name="post.author_name"
+									:author_image="post.authorImg.asset._ref"
+									:slug="post.slug.current"
+									:body="post.body[0].children[0].text"
+								></Post>
 							</div>
-							<div class="mt-6 flex items-center">
-								<div class="flex-shrink-0">
-									<span class="sr-only">{{ post.author_name }}</span>
-									<img
-										class="h-10 w-10 rounded-full"
-										:src="$urlFor(post.authorImg)"
-										alt="123456789"
-										loading="lazy"
-									/>
-								</div>
-								<div class="ml-3">
-									<p class="text-sm font-medium text-gray-900">Shay</p>
-									<div class="flex space-x-1 text-sm text-gray-500">
-										<time :datetime="post.publishedAt">
-											{{ post.publishedAt }}
-										</time>
-									</div>
-								</div>
+							<div v-else>
+								<p>No posts to load.</p>
 							</div>
-						</div>
-					</div>
+						</template>
+						<template #fallback>
+							<p>Loading blog posts...</p>
+						</template>
+					</suspense>
 				</div>
 			</div>
 		</div>
@@ -267,29 +251,41 @@
 </template>
 
 <script setup>
-	const postquery = groq` { "post": *[_type == "post"]{title, "author_name": author->name, "authorImg": author->image, publishedAt, slug, mainImage, body}[0...6],
-							  "experience": *[_type == "experience"]{company, role, mainImage, startDate, endDate, location, body[]{
-	    ...,
-	    asset->{
-	      ...,
-	      "_key": _id
-	    },
-	  }}[0...5],
-	  						  "brands": *[_type == "brands"]{company, mainImage}[0...6]}`;
+	import { storeToRefs } from 'pinia';
+	import { usePostsStore } from '@/store/posts';
+	import { useExperienceStore } from '@/store/experience';
+	import { useBrandStore } from '@/store/brands';
 
-	const { data, refresh } = useSanityQuery(postquery);
+	const { posts } = storeToRefs(usePostsStore());
+	const { experience } = storeToRefs(useExperienceStore());
+	const { brands } = storeToRefs(useBrandStore());
+	const { fetchPosts } = usePostsStore();
+	const { fetchExperience } = useExperienceStore();
+	const { fetchBrands } = useBrandStore();
+
+	fetchPosts();
+	fetchExperience();
+	fetchBrands();
 </script>
 
 <script>
 	import 'animate.css';
 
 	export default {
+		name: 'index',
+		transition: {
+			name: 'test',
+			mode: 'out-in',
+		},
+
 		mounted() {
-			if (localStorage.getItem('visited') === 'true') {
-				document.getElementById('loader').remove();
-				window.scrollTo(0, 0);
-				return;
-			}
+			window.scrollTo(0, 0);
+			// if (localStorage.getItem('visited') === 'true') {
+			// 	document.getElementById('loader').remove();
+			// 	window.scrollTo(0, 0);
+			// 	return;
+			// } disabled for debugging
+
 			/* Probably a better way of doing this */
 			document.body.style.overflowY = 'hidden';
 			setTimeout(() => {
