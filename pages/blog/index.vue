@@ -79,7 +79,7 @@
 
 <script setup>
 	const postquery = groq`*[_type == "post"]{title, "author_name": author->name, "authorImg": author->image, publishedAt, slug, mainImage, body}[0...12]`;
-	const { data } = useSanityQuery(postquery);
+	const { data, refresh } = useSanityQuery(postquery);
 </script>
 
 <script>

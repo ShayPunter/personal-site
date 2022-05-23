@@ -131,5 +131,5 @@
     },
   }}[0...5]`;
 
-	const { post } = useSanityQuery(query);
+	const { post, refresh } = useSanityQuery(query);
 </script>

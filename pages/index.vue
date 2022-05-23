@@ -277,7 +277,7 @@
 	  }}[0...5],
 	  						  "brands": *[_type == "brands"]{company, mainImage}[0...6]}`;
 
-	const { data } = useSanityQuery(postquery);
+	const { data, refresh } = useSanityQuery(postquery);
 </script>
 
 <script>
