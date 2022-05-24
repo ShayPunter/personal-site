@@ -98,7 +98,7 @@
 				nav: [
 					{ name: 'Portfolio', href: '/portfolio' },
 					{ name: 'Blog', href: '/blog' },
-					{ name: 'Hire me', href: '#' },
+					// { name: 'Hire me', href: '#' },
 				],
 			};
 		},

@@ -1,4 +1,3 @@
-<!-- Please remove this file from your project -->
 <template>
 	<div class="grid gap-8 grid-cols-1 sm:grid-cols-3">
 		<div>

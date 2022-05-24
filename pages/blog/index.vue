@@ -20,7 +20,7 @@
 				>
 					<suspense>
 						<template #default>
-							<div v-for="post in blogposts.data">
+							<div v-for="post in data.posts">
 								<Post
 									:title="post.title"
 									:publishedAt="post.publishedAt"
@@ -43,13 +43,10 @@
 </template>
 
 <script setup>
-	import { storeToRefs } from 'pinia';
-	import { usePostsStore } from '@/store/posts';
+	const postquery = groq`{ "posts": *[_type == "post"]{title, "author_name": author->name, "authorImg": author->image, publishedAt, slug, mainImage, body}[0...6]}`;
 
-	const { blogposts } = storeToRefs(usePostsStore());
-	const { fetchPosts } = usePostsStore();
-
-	fetchPosts();
+	const sanity = useSanity();
+	const { data } = await useAsyncData('data', () => sanity.fetch(postquery));
 </script>
 
 <script>

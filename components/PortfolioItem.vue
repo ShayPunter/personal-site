@@ -28,26 +28,7 @@
 					{{ body }}
 				</NuxtLink>
 			</div>
-			<div class="mt-6 flex items-center">
-				<div class="flex-shrink-0">
-					<span class="sr-only">{{ author_name }}</span>
-					<SanityImage
-						:asset-id="author_image"
-						auto="format"
-						:alt="author_name"
-						class="h-10 w-10 rounded-full"
-						loading="lazy"
-					/>
-				</div>
-				<div class="ml-3">
-					<p class="text-sm font-medium text-gray-900">Shay</p>
-					<div class="flex space-x-1 text-sm text-gray-500">
-						<time :datetime="publishedAt">
-							{{ publishedAt }}
-						</time>
-					</div>
-				</div>
-			</div>
+			<div class="mt-6 flex items-center"></div>
 		</div>
 	</div>
 </template>
@@ -61,19 +42,13 @@
 			image: {
 				required: true,
 			},
-			publishedAt: {
-				required: true,
-			},
-			author_name: {
-				required: true,
-			},
-			author_image: {
-				required: true,
-			},
 			slug: {
 				required: true,
 			},
 			body: {
+				required: true,
+			},
+			weblink: {
 				required: true,
 			},
 		},

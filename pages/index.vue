@@ -99,7 +99,7 @@
 				<div>
 					<suspense>
 						<template #default>
-							<div class="mt-20" v-for="experienc in experience">
+							<div class="mt-20" v-for="experienc in data.expr">
 								<Experience
 									:company="experienc.company"
 									:role="experienc.role"
@@ -142,7 +142,7 @@
 							<template #default>
 								<div
 									class="col-span-1 flex justify-center py-8 px-8 bg-gray-50"
-									v-for="brand in brands"
+									v-for="brand in data.brands"
 								>
 									<SanityImage
 										:asset-id="brand.mainImage.asset._ref"
@@ -163,7 +163,7 @@
 		</div>
 
 		<!-- BLOG / LEARNING -->
-		<!-- <div
+		<div
 			class="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8"
 		>
 			<div class="absolute inset-0">
@@ -182,7 +182,7 @@
 				>
 					<suspense>
 						<template #default>
-							<div v-for="post in blogposts.data">
+							<div v-for="post in data.posts">
 								<Post
 									:title="post.title"
 									:publishedAt="post.publishedAt"
@@ -200,7 +200,7 @@
 					</suspense>
 				</div>
 			</div>
-		</div> -->
+		</div>
 
 		<!-- GET IN TOUCH -->
 		<div class="bg-white">
@@ -248,21 +248,18 @@
 </template>
 
 <script setup>
-	import { storeToRefs } from 'pinia';
-	import { usePostsStore } from '@/store/posts';
-	import { useExperienceStore } from '@/store/experience';
-	import { useBrandStore } from '@/store/brands';
+	const postquery = groq`{ "posts": *[_type == "post"]{title, "author_name": author->name, "authorImg": author->image, publishedAt, slug, mainImage, body}[0...6],
+                              "expr": *[_type == "experience"]{company, role, mainImage, startDate, endDate, location, body[]{
+    ..., 
+    asset->{
+      ...,
+      "_key": _id
+    },
+  }}[0...5],
+  "brands": *[_type == "brands"]{company, mainImage}[0...6]}`;
 
-	const { blogposts } = storeToRefs(usePostsStore());
-	const { experience } = storeToRefs(useExperienceStore());
-	const { brands } = storeToRefs(useBrandStore());
-	const { fetchPosts } = usePostsStore();
-	const { fetchExperience } = useExperienceStore();
-	const { fetchBrands } = useBrandStore();
-
-	// fetchPosts();
-	fetchExperience();
-	fetchBrands();
+	const sanity = useSanity();
+	const { data } = await useAsyncData('data', () => sanity.fetch(postquery));
 </script>
 
 <script>
