@@ -53,6 +53,6 @@
 			},
 		},
 
-		name: 'Post',
+		name: 'PortfolioItem',
 	};
 </script>
