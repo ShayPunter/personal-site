@@ -20,7 +20,7 @@
 				>
 					<suspense>
 						<template #default>
-							<div v-for="post in posts" v-if="posts">
+							<div v-for="post in blogposts.data">
 								<Post
 									:title="post.title"
 									:publishedAt="post.publishedAt"
@@ -30,9 +30,6 @@
 									:slug="post.slug.current"
 									:body="post.body[0].children[0].text"
 								></Post>
-							</div>
-							<div v-else>
-								<p>No posts to load.</p>
 							</div>
 						</template>
 						<template #fallback>
@@ -49,7 +46,7 @@
 	import { storeToRefs } from 'pinia';
 	import { usePostsStore } from '@/store/posts';
 
-	const { posts } = storeToRefs(usePostsStore());
+	const { blogposts } = storeToRefs(usePostsStore());
 	const { fetchPosts } = usePostsStore();
 
 	fetchPosts();

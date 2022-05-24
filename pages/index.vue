@@ -163,7 +163,7 @@
 		</div>
 
 		<!-- BLOG / LEARNING -->
-		<div
+		<!-- <div
 			class="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8"
 		>
 			<div class="absolute inset-0">
@@ -182,7 +182,7 @@
 				>
 					<suspense>
 						<template #default>
-							<div v-for="post in posts" v-if="posts">
+							<div v-for="post in blogposts.data">
 								<Post
 									:title="post.title"
 									:publishedAt="post.publishedAt"
@@ -193,9 +193,6 @@
 									:body="post.body[0].children[0].text"
 								></Post>
 							</div>
-							<div v-else>
-								<p>No posts to load.</p>
-							</div>
 						</template>
 						<template #fallback>
 							<p>Loading blog posts...</p>
@@ -203,7 +200,7 @@
 					</suspense>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 		<!-- GET IN TOUCH -->
 		<div class="bg-white">
@@ -256,14 +253,14 @@
 	import { useExperienceStore } from '@/store/experience';
 	import { useBrandStore } from '@/store/brands';
 
-	const { posts } = storeToRefs(usePostsStore());
+	const { blogposts } = storeToRefs(usePostsStore());
 	const { experience } = storeToRefs(useExperienceStore());
 	const { brands } = storeToRefs(useBrandStore());
 	const { fetchPosts } = usePostsStore();
 	const { fetchExperience } = useExperienceStore();
 	const { fetchBrands } = useBrandStore();
 
-	fetchPosts();
+	// fetchPosts();
 	fetchExperience();
 	fetchBrands();
 </script>
