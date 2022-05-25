@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-	const postquery = groq`{ "posts": *[_type == "post"]{title, "author_name": author->name, "authorImg": author->image, publishedAt, slug, mainImage, body}[0...6]}`;
+	const postquery = groq`{ "posts": *[_type == "post"]{title, "author_name": author->name, "authorImg": author->image, publishedAt, slug, mainImage, body}}`;
 
 	const sanity = useSanity();
 	const { data } = await useAsyncData('data', () => sanity.fetch(postquery));
