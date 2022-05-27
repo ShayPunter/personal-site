@@ -6,9 +6,6 @@ export default defineNuxtConfig({
 	//ssr: true,
 
 	head: {
-		title: 'Shay Punter | Software Engineer & Project Manager',
-		description:
-			'Shay Punter is a software engineer and project manager based in Liverpool, UK. He is passionate about building web applications and solving problems.',
 		htmlAttrs: {
 			lang: 'en',
 		},
@@ -17,6 +14,15 @@ export default defineNuxtConfig({
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
 			{ hid: 'description', name: 'description', content: '' },
 			{ name: 'format-detection', content: 'telephone=no' },
+			{
+				name: 'description',
+				content:
+					'Shay Punter is a software engineer and project manager based in Liverpool, UK. He is passionate about building web applications and solving problems.',
+			},
+			{
+				name: 'title',
+				content: 'Shay Punter | Software Engineer & Project Manager',
+			},
 		],
 		link: [{ rel: 'icon', type: 'image/x-icon', href: 'static/favicon.ico' }],
 	},
