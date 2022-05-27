@@ -7,6 +7,7 @@
 		"preview": "nuxt preview"
 	},
 	"dependencies": {
+		"@nuxt/image": "^0.6.2",
 		"@nuxtjs/sanity": "^1.2.1",
 		"@nuxtjs/tailwindcss": "^5.0.4",
 		"@pinia/nuxt": "^0.1.9",
@@ -15,6 +16,7 @@
 		"@tailwindcss/typography": "^0.5.2",
 		"animate.css": "^4.1.1",
 		"axios": "^0.27.2",
+		"gsap": "^3.10.4",
 		"motion": "^10.8.3",
 		"nuxt": "3.0.0-rc.3",
 		"sanity-blocks-vue-component": "^1.0.1",

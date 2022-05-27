@@ -11,7 +11,7 @@
 			<div class="mt-6 prose prose-indigo prose-lg text-gray-500 mx-auto">
 				<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div class="max-w-4xl mx-auto">
-						<SanityContent :blocks="body" />
+						<SanityBlocks :blocks="body" />
 					</div>
 				</div>
 			</div>
@@ -20,7 +20,10 @@
 </template>
 
 <script>
+	import { SanityBlocks } from 'sanity-blocks-vue-component';
+
 	export default {
+		components: { SanityBlocks },
 		props: {
 			title: {
 				required: true,
