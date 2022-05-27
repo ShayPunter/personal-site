@@ -97,14 +97,14 @@
 			<!-- PORTFOLIO / JOURNEY -->
 			<div class="bg-white">
 				<div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
-					<div class="text-center">
+					<div id="c-experience" class="text-center">
 						<h2
-							class="text-base font-semibold text-blue-600 tracking-wide uppercase"
+							class="text-base opacity-0 font-semibold text-blue-600 tracking-wide uppercase"
 						>
 							Experience
 						</h2>
 						<p
-							class="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl"
+							class="mt-1 text-4xl opacity-0 font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl"
 						>
 							Shay's Journey
 						</p>
@@ -283,33 +283,24 @@
 	export default {
 		name: 'index',
 
-		// created: function () {
-		// 	document.addEventListener('DOMContentLoaded', function () {
-		// 		gsap.utils.toArray('.gs_reveal').forEach(function (elem) {
-		// 			hide(elem); // assure that the element is hidden when scrolled into view
-
-		// 			ScrollTrigger.create({
-		// 				trigger: elem,
-		// 				onEnter: function () {
-		// 					animateFrom(elem);
-		// 				},
-		// 				onEnterBack: function () {
-		// 					animateFrom(elem, -1);
-		// 				},
-		// 				onLeave: function () {
-		// 					hide(elem);
-		// 				}, // assure that the element is hidden when scrolled into view
-		// 			});
-		// 		});
-		// 	});
-		// },
-
 		beforeMount() {
 			window.scrollTo(0, 0);
 		},
 
+		data: function () {
+			return {
+				pageanimation: {
+					experience: {
+						title: false,
+						area: false,
+					},
+				},
+			};
+		},
+
 		mounted() {
 			this.regListener();
+			this.textScrollIn();
 			// if (localStorage.getItem('visited') === 'true') {
 			// 	document.getElementById('loader').remove();
 			// 	window.scrollTo(0, 0);
@@ -441,14 +432,27 @@
 
 		methods: {
 			regListener: function () {
-				console.log('ae5');
+				var count = 1;
+				var arrayLength = gsap.utils.toArray('.gs_reveal').length - 1;
+				var expr_area = false;
+
+				console.log(arrayLength);
 				gsap.utils.toArray('.gs_reveal').forEach(function (elem) {
 					gsap.set(elem, { autoAlpha: 0 });
 
 					ScrollTrigger.create({
 						trigger: elem,
 						onEnter: function () {
-							console.log('ae');
+							if (expr_area) {
+								return;
+							}
+
+							if (count <= arrayLength) {
+								count++;
+							} else {
+								expr_area = true;
+							}
+
 							var direction = 1;
 							var x = 0,
 								y = direction * 100;
@@ -465,7 +469,7 @@
 								elem,
 								{ x: x, y: y, autoAlpha: 0 },
 								{
-									duration: 1.25,
+									duration: 3,
 									x: 0,
 									y: 0,
 									autoAlpha: 1,
@@ -473,71 +477,40 @@
 									overwrite: 'auto',
 								},
 							);
-						},
-						onEnterBack: function () {
-							console.log('ae2');
-							var direction = -1;
-							var x = 0,
-								y = direction * 100;
-							if (elem.classList.contains('gs_reveal_fromLeft')) {
-								x = -100;
-								y = 0;
-							} else if (elem.classList.contains('gs_reveal_fromRight')) {
-								x = 100;
-								y = 0;
-							}
-							elem.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
-							elem.style.opacity = '0';
-							gsap.fromTo(
-								elem,
-								{ x: x, y: y, autoAlpha: 0 },
-								{
-									duration: 1.25,
-									x: 0,
-									y: 0,
-									autoAlpha: 1,
-									ease: 'expo',
-									overwrite: 'auto',
-								},
-							);
-						},
-						onLeave: function () {
-							console.log('ae3');
-							gsap.set(elem, { autoAlpha: 0 });
 						},
 					});
 				});
 			},
 
-			animateFrom(elem, direction) {
-				direction = direction || 1;
-				var x = 0,
-					y = direction * 100;
-				if (elem.classList.contains('gs_reveal_fromLeft')) {
-					x = -100;
-					y = 0;
-				} else if (elem.classList.contains('gs_reveal_fromRight')) {
-					x = 100;
-					y = 0;
-				}
-				elem.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
-				elem.style.opacity = '0';
-				gsap.fromTo(
-					elem,
-					{ x: x, y: y, autoAlpha: 0 },
-					{
-						duration: 1.25,
-						x: 0,
-						y: 0,
-						autoAlpha: 1,
-						ease: 'expo',
-						overwrite: 'auto',
-					},
-				);
-			},
+			textScrollIn() {
+				var expr_titles = false;
 
-			hide: function (elem) {
-				gsap.set(elem, { autoAlpha: 0 });
+				ScrollTrigger.create({
+					trigger: '#c-experience',
+					onEnter: function () {
+						if (expr_titles) {
+							return;
+						}
+						expr_titles = true;
+
+						gsap.fromTo(
+							'#c-experience h2',
+							{
+								y: '50',
+							},
+							{ duration: 1, y: '0', opacity: 1 },
+						);
+						setTimeout(() => {
+							gsap.fromTo(
+								'#c-experience p',
+								{
+									y: '50',
+								},
+								{ duration: 1.2, y: '0', opacity: 1 },
+							);
+						}, 400);
+					},
+				});
 			},
 		},
 
