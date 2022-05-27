@@ -28,16 +28,20 @@
 		</div>
 
 		<div class="absolute inset-0 z-0">
-			<div class="flex relative h-screen mx-auto bg-gray-900 animate__animated">
+			<div
+				id="c-hero"
+				class="flex relative h-screen mx-auto bg-gray-900 animate__animated"
+			>
 				<div class="my-auto mx-8 sm:mx-auto">
 					<div class="align-center text-center">
 						<h1
-							class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl"
+							class="text-4xl opacity-0 tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl"
 						>
 							SHAY PUNTER
 						</h1>
 						<p
-							class="mt-3 max-w-md mx-auto text-base text-gray-300 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl"
+							id="c-hero-p"
+							class="mt-3 opacity-0 max-w-md mx-auto text-base text-gray-300 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl"
 						>
 							Welcome to my website, I am a full stack developer & project
 							manager and here you'll find everything you need to know about me
@@ -46,7 +50,7 @@
 						<div
 							class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8"
 						>
-							<div class="rounded-md shadow">
+							<div id="fadeinButton" class="opacity-0 rounded-md shadow">
 								<NuxtLink
 									to="/portfolio"
 									class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-700 hover:bg-blue-800 md:py-4 md:text-lg md:px-10"
@@ -55,7 +59,10 @@
 								</NuxtLink>
 							</div>
 
-							<div class="mt-4 sm:ml-4 sm:mt-0 rounded-md shadow">
+							<div
+								id="fadeinButton"
+								class="opacity-0 mt-4 sm:ml-4 sm:mt-0 rounded-md shadow"
+							>
 								<NuxtLink
 									to="/blog"
 									class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-700 hover:bg-gray-800 md:py-4 md:text-lg md:px-10"
@@ -67,7 +74,7 @@
 					</div>
 				</div>
 				<div class="absolute bottom-0 left-0 ml-10 mb-10">
-					<div class="inline-flex">
+					<div id="fadeInScroll" class="opacity-0 inline-flex">
 						<p class="text-gray-300">Scroll Down For More</p>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -104,25 +111,21 @@
 					</div>
 
 					<div>
-						<suspense>
-							<template #default>
-								<div class="mt-20" v-for="experienc in data.expr">
-									<Experience
-										:company="experienc.company"
-										:role="experienc.role"
-										:startDate="experienc.startDate"
-										:endDate="experienc.endDate"
-										:location="experienc.location"
-										:url="experienc.mainImage"
-									>
-										<SanityContent :blocks="experienc.body" />
-									</Experience>
-								</div>
-							</template>
-							<template #fallback>
-								<p>Loading experience...</p>
-							</template>
-						</suspense>
+						<div
+							class="mt-20 gs_reveal gs_reveal_fromLeft"
+							v-for="experienc in data.expr"
+						>
+							<Experience
+								:company="experienc.company"
+								:role="experienc.role"
+								:startDate="experienc.startDate"
+								:endDate="experienc.endDate"
+								:location="experienc.location"
+								:url="experienc.mainImage"
+							>
+								<SanityContent :blocks="experienc.body" />
+							</Experience>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -273,12 +276,40 @@
 <script>
 	import 'animate.css';
 	import { gsap } from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+	gsap.registerPlugin(ScrollTrigger);
 
 	export default {
 		name: 'index',
 
-		mounted() {
+		// created: function () {
+		// 	document.addEventListener('DOMContentLoaded', function () {
+		// 		gsap.utils.toArray('.gs_reveal').forEach(function (elem) {
+		// 			hide(elem); // assure that the element is hidden when scrolled into view
+
+		// 			ScrollTrigger.create({
+		// 				trigger: elem,
+		// 				onEnter: function () {
+		// 					animateFrom(elem);
+		// 				},
+		// 				onEnterBack: function () {
+		// 					animateFrom(elem, -1);
+		// 				},
+		// 				onLeave: function () {
+		// 					hide(elem);
+		// 				}, // assure that the element is hidden when scrolled into view
+		// 			});
+		// 		});
+		// 	});
+		// },
+
+		beforeMount() {
 			window.scrollTo(0, 0);
+		},
+
+		mounted() {
+			this.regListener();
 			// if (localStorage.getItem('visited') === 'true') {
 			// 	document.getElementById('loader').remove();
 			// 	window.scrollTo(0, 0);
@@ -345,7 +376,7 @@
 					},
 					{ duration: 2, attr: { x1: '0' }, ease: 'power2.inOut' },
 				);
-			}, 3000);
+			}, 2900);
 
 			// Slide Up Page
 			setTimeout(() => {
@@ -354,16 +385,160 @@
 					{
 						y: '0',
 					},
-					{ duration: 2, y: '-150%', opacity: 1, ease: 'power4.out' },
+					{ duration: 1, y: '-250%', opacity: 1, ease: 'power4.out' },
 				);
-			}, 3300);
+			}, 3500);
 
 			// Enable scroll bar
 			setTimeout(() => {
 				document.body.style.overflow = 'auto';
 			}, 3800);
 
+			// Hero - Load Title
+			setTimeout(() => {
+				gsap.fromTo(
+					'#c-hero h1',
+					{
+						y: '50',
+					},
+					{ duration: 1, y: '0', opacity: 1 },
+				);
+			}, 4500);
+
+			// Hero - Load P
+			setTimeout(() => {
+				gsap.fromTo(
+					'#c-hero #c-hero-p',
+					{
+						y: '50',
+					},
+					{ duration: 1, y: '0', opacity: 1 },
+				);
+			}, 4600);
+
+			setTimeout(() => {
+				gsap.fromTo(
+					'#c-hero #fadeinButton',
+					{
+						y: '50',
+					},
+					{ duration: 1, y: '0', opacity: 1 },
+				);
+			}, 4800);
+
+			setTimeout(() => {
+				gsap.fromTo(
+					'#c-hero #fadeInScroll',
+					{
+						y: '100',
+					},
+					{ duration: 1, y: '0', opacity: 1 },
+				);
+			}, 5000);
+
 			localStorage.setItem('visited', 'true');
+		},
+
+		methods: {
+			regListener: function () {
+				console.log('ae5');
+				gsap.utils.toArray('.gs_reveal').forEach(function (elem) {
+					gsap.set(elem, { autoAlpha: 0 });
+
+					ScrollTrigger.create({
+						trigger: elem,
+						onEnter: function () {
+							console.log('ae');
+							var direction = 1;
+							var x = 0,
+								y = direction * 100;
+							if (elem.classList.contains('gs_reveal_fromLeft')) {
+								x = -100;
+								y = 0;
+							} else if (elem.classList.contains('gs_reveal_fromRight')) {
+								x = 100;
+								y = 0;
+							}
+							elem.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+							elem.style.opacity = '0';
+							gsap.fromTo(
+								elem,
+								{ x: x, y: y, autoAlpha: 0 },
+								{
+									duration: 1.25,
+									x: 0,
+									y: 0,
+									autoAlpha: 1,
+									ease: 'expo',
+									overwrite: 'auto',
+								},
+							);
+						},
+						onEnterBack: function () {
+							console.log('ae2');
+							var direction = -1;
+							var x = 0,
+								y = direction * 100;
+							if (elem.classList.contains('gs_reveal_fromLeft')) {
+								x = -100;
+								y = 0;
+							} else if (elem.classList.contains('gs_reveal_fromRight')) {
+								x = 100;
+								y = 0;
+							}
+							elem.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+							elem.style.opacity = '0';
+							gsap.fromTo(
+								elem,
+								{ x: x, y: y, autoAlpha: 0 },
+								{
+									duration: 1.25,
+									x: 0,
+									y: 0,
+									autoAlpha: 1,
+									ease: 'expo',
+									overwrite: 'auto',
+								},
+							);
+						},
+						onLeave: function () {
+							console.log('ae3');
+							gsap.set(elem, { autoAlpha: 0 });
+						},
+					});
+				});
+			},
+
+			animateFrom(elem, direction) {
+				direction = direction || 1;
+				var x = 0,
+					y = direction * 100;
+				if (elem.classList.contains('gs_reveal_fromLeft')) {
+					x = -100;
+					y = 0;
+				} else if (elem.classList.contains('gs_reveal_fromRight')) {
+					x = 100;
+					y = 0;
+				}
+				elem.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+				elem.style.opacity = '0';
+				gsap.fromTo(
+					elem,
+					{ x: x, y: y, autoAlpha: 0 },
+					{
+						duration: 1.25,
+						x: 0,
+						y: 0,
+						autoAlpha: 1,
+						ease: 'expo',
+						overwrite: 'auto',
+					},
+				);
+			},
+
+			hide: function (elem) {
+				gsap.set(elem, { autoAlpha: 0 });
+			},
 		},
 
 		filters: {
@@ -376,5 +551,11 @@
 <style scope>
 	body {
 		overflow: hidden;
+	}
+
+	.gs_reveal {
+		opacity: 0;
+		visibility: hidden;
+		will-change: transform, opacity;
 	}
 </style>
