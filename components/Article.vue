@@ -11,7 +11,18 @@
 			<div class="mt-6 prose prose-indigo prose-lg text-gray-500 mx-auto">
 				<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div class="max-w-4xl mx-auto">
-						<SanityBlocks :blocks="body" />
+						<div v-for="section in body" v-bind:key="section._key">
+							<SanityContent
+								v-if="section._type === 'block'"
+								:blocks="[section]"
+							></SanityContent>
+
+							<SanityImage
+								:assetId="section.asset._id"
+								v-if="section && section._type === 'image'"
+								class="my-4"
+							></SanityImage>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -20,19 +31,49 @@
 </template>
 
 <script>
-	import { SanityBlocks } from 'sanity-blocks-vue-component';
+	import PostImage from './PostImage.vue';
 
 	export default {
-		components: { SanityBlocks },
 		props: {
 			title: {
 				required: true,
 			},
 			body: {
+				type: [Array],
+				default: () => [],
 				required: true,
+			},
+		},
+
+		data() {
+			return {
+				serializers: {
+					types: {
+						image: PostImage,
+					},
+				},
+			};
+		},
+
+		methods: {
+			objectToArray: (obk) => {
+				var result = [];
+
+				for (var key in obk) {
+					result.push(obk[key]);
+				}
+
+				return result;
 			},
 		},
 
 		name: 'Article',
 	};
 </script>
+
+<style>
+	a {
+		color: #0070f3;
+		text-decoration: underline;
+	}
+</style>

@@ -19,7 +19,7 @@
 		"gsap": "^3.10.4",
 		"motion": "^10.8.3",
 		"nuxt": "3.0.0-rc.3",
-		"sanity-blocks-vue-component": "^1.0.1",
+		"sanity-blocks-vue-component": "1.0.1",
 		"url": "^0.11.0"
 	},
 	"devDependencies": {
