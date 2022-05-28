@@ -203,7 +203,7 @@
 						</h2>
 					</div>
 					<div
-						class="overflow-hidden mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none"
+						class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none"
 					>
 						<suspense>
 							<template #default>
