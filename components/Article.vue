@@ -70,10 +70,3 @@
 		name: 'Article',
 	};
 </script>
-
-<style>
-	a {
-		color: #0070f3;
-		text-decoration: underline;
-	}
-</style>

@@ -1,5 +1,12 @@
 <template>
 	<div>
+		<Head>
+			<Title>Software Engineer & Project Manager</Title>
+			<Meta
+				name="description"
+				content="Shay Punter is a software engineer and project manager based in Liverpool, UK. He is passionate about building web applications and solving problems."
+			/>
+		</Head>
 		<div
 			id="loader"
 			class="loader z-10 flex relative h-screen mx-auto bg-gray-800 transition-all animate__fast"
