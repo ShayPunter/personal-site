@@ -97,7 +97,11 @@
 			<!-- PORTFOLIO / JOURNEY -->
 			<div class="bg-white">
 				<div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
-					<div id="c-experience" class="text-center">
+					<div
+						id="c-experience"
+						class="overflow-y-hidden text-center"
+						style="height: 100px"
+					>
 						<h2
 							class="text-base opacity-0 font-semibold text-blue-600 tracking-wide uppercase"
 						>
@@ -133,25 +137,32 @@
 			<!-- LOGO CLOUD -->
 			<div class="bg-white">
 				<div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
-					<div class="text-center">
+					<div
+						id="c-brands"
+						class="overflow-y-hidden text-center"
+						style="height: 100px"
+					>
 						<h3
-							class="text-base font-semibold text-blue-600 tracking-wide uppercase"
+							class="text-base opacity-0 font-semibold text-blue-600 tracking-wide uppercase"
 						>
 							Providing a result-focused service
 						</h3>
 						<p
-							class="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl"
+							class="mt-1 text-4xl opacity-0 font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight lg:text-6xl"
 						>
 							Brands Shay has worked with
 						</p>
 					</div>
 
 					<div class="mt-20">
-						<div class="mt-6 grid grid-cols-2 gap-0.5 md:grid-cols-3 lg:mt-8">
+						<div
+							class="overflow-hidden mt-6 grid grid-cols-2 gap-0.5 md:grid-cols-3 lg:mt-8"
+						>
 							<suspense>
 								<template #default>
 									<div
-										class="col-span-1 flex justify-center py-8 px-8 bg-gray-50"
+										id="brandicons"
+										class="opacity-0 col-span-1 flex justify-center py-8 px-8 bg-gray-50"
 										v-for="brand in data.brands"
 									>
 										<SanityImage
@@ -180,19 +191,27 @@
 					<div class="bg-white h-1/3 sm:h-2/3" />
 				</div>
 				<div class="relative max-w-7xl mx-auto">
-					<div class="text-center">
+					<div
+						id="c-posts"
+						class="overflow-hidden text-center"
+						style="height: 60px"
+					>
 						<h2
-							class="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl"
+							class="opacity-0 text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl"
 						>
 							Learn from me / The blog
 						</h2>
 					</div>
 					<div
-						class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none"
+						class="overflow-hidden mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none"
 					>
 						<suspense>
 							<template #default>
-								<div v-for="post in data.posts">
+								<div
+									v-for="post in data.posts"
+									id="c-post-item"
+									class="opacity-0"
+								>
 									<Post
 										:title="post.title"
 										:publishedAt="post.publishedAt"
@@ -433,10 +452,15 @@
 		methods: {
 			regListener: function () {
 				var count = 1;
+				var brandcount = 1;
+				var postcount = 1;
 				var arrayLength = gsap.utils.toArray('.gs_reveal').length - 1;
+				var arrayLength2 = gsap.utils.toArray('#brandicons').length - 1;
+				var arrayLength3 = gsap.utils.toArray('#c-post-item').length - 1;
 				var expr_area = false;
+				var brand_area = false;
+				var post_area = false;
 
-				console.log(arrayLength);
 				gsap.utils.toArray('.gs_reveal').forEach(function (elem) {
 					gsap.set(elem, { autoAlpha: 0 });
 
@@ -465,18 +489,74 @@
 							}
 							elem.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
 							elem.style.opacity = '0';
-							gsap.fromTo(
-								elem,
-								{ x: x, y: y, autoAlpha: 0 },
-								{
-									duration: 3,
-									x: 0,
-									y: 0,
-									autoAlpha: 1,
-									ease: 'expo',
-									overwrite: 'auto',
-								},
-							);
+							setTimeout(() => {
+								gsap.fromTo(
+									elem,
+									{ x: x, y: y, autoAlpha: 0 },
+									{
+										duration: 3,
+										x: 0,
+										y: 0,
+										autoAlpha: 1,
+										ease: 'expo',
+										overwrite: 'auto',
+									},
+								);
+							}, 400);
+						},
+					});
+				});
+
+				gsap.utils.toArray('#brandicons').forEach(function (elem) {
+					ScrollTrigger.create({
+						trigger: elem,
+						onEnter: function () {
+							if (brand_area) {
+								return;
+							}
+
+							if (brandcount <= arrayLength2) {
+								brandcount++;
+							} else {
+								brand_area = true;
+							}
+
+							setTimeout(() => {
+								gsap.fromTo(
+									elem,
+									{
+										y: '300',
+									},
+									{ duration: 2, y: '0', opacity: 1, ease: 'power4.out' },
+								);
+							}, 500);
+						},
+					});
+				});
+
+				gsap.utils.toArray('#c-post-item').forEach(function (elem) {
+					ScrollTrigger.create({
+						trigger: elem,
+						onEnter: function () {
+							if (post_area) {
+								return;
+							}
+
+							if (postcount <= arrayLength3) {
+								postcount++;
+							} else {
+								post_area = true;
+							}
+
+							setTimeout(() => {
+								gsap.fromTo(
+									elem,
+									{
+										y: '300',
+									},
+									{ duration: 2, y: '0', opacity: 1, ease: 'power4.out' },
+								);
+							}, 500);
 						},
 					});
 				});
@@ -484,6 +564,8 @@
 
 			textScrollIn() {
 				var expr_titles = false;
+				var brands_titles = false;
+				var post_titles = false;
 
 				ScrollTrigger.create({
 					trigger: '#c-experience',
@@ -509,6 +591,51 @@
 								{ duration: 1.2, y: '0', opacity: 1 },
 							);
 						}, 400);
+					},
+				});
+
+				ScrollTrigger.create({
+					trigger: '#c-brands',
+					onEnter: function () {
+						if (brands_titles) {
+							return;
+						}
+						brands_titles = true;
+
+						gsap.fromTo(
+							'#c-brands h3',
+							{
+								y: '50',
+							},
+							{ duration: 1, y: '0', opacity: 1 },
+						);
+						setTimeout(() => {
+							gsap.fromTo(
+								'#c-brands p',
+								{
+									y: '50',
+								},
+								{ duration: 1.2, y: '0', opacity: 1 },
+							);
+						}, 400);
+					},
+				});
+
+				ScrollTrigger.create({
+					trigger: '#c-posts',
+					onEnter: function () {
+						if (post_titles) {
+							return;
+						}
+						post_titles = true;
+
+						gsap.fromTo(
+							'#c-posts h2',
+							{
+								y: '100',
+							},
+							{ duration: 1, y: '0', opacity: 1 },
+						);
 					},
 				});
 			},
