@@ -24,7 +24,14 @@ export default defineNuxtConfig({
 				content: 'Shay Punter | Software Engineer & Project Manager',
 			},
 		],
-		link: [{ rel: 'icon', type: 'image/x-icon', href: 'static/favicon.ico' }],
+		link: [
+			{ rel: 'icon', type: 'image/x-icon', href: 'static/favicon.ico' },
+			{
+				rel: 'preconnect',
+				href: 'https://cdn.sanity.io/',
+				crossorigin: true,
+			},
+		],
 	},
 
 	modules: ['@nuxtjs/tailwindcss', '@nuxtjs/sanity'],
