@@ -3,6 +3,7 @@
 		<Head>
 			<Title>{{ data.title }}</Title>
 			<Meta name="description" :content="data.body[0].children[0].text" />
+			<Meta rel="preconnect" href="https://cdn.sanity.io" />
 		</Head>
 		<Article :title="data.title" :body="data.body"></Article>
 	</NuxtLayout>

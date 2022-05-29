@@ -6,6 +6,7 @@
 				name="description"
 				content="Shay Punter is a software engineer and project manager based in Liverpool, UK. He is passionate about building web applications and solving problems."
 			/>
+			<Meta rel="preconnect" href="https://cdn.sanity.io" />
 		</Head>
 		<div
 			id="loader"

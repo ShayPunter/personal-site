@@ -3,6 +3,7 @@
 		<Head>
 			<Title>Blog</Title>
 			<Meta name="description" content="Shay Punter Blog Page" />
+			<Meta rel="preconnect" href="https://cdn.sanity.io" />
 		</Head>
 		<!-- BLOG / LEARNING -->
 		<div
