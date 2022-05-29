@@ -14,21 +14,34 @@
 		<div class="flex-1 bg-white p-6 flex flex-col justify-between">
 			<div class="flex-1">
 				<NuxtLink
-					:to="'/blog/' + slug"
+					:to="weblink"
 					class="block mt-2 text-xl font-semibold text-gray-900"
-					:key="slug"
+					:key="weblink"
 				>
 					{{ title }}
 				</NuxtLink>
 				<NuxtLink
-					:to="'/blog/' + slug"
+					:to="weblink"
 					class="block mt-2 mt-3 text-base text-gray-500"
-					:key="slug"
+					:key="weblink"
 				>
 					{{ body }}
 				</NuxtLink>
 			</div>
-			<div class="mt-6 flex items-center"></div>
+			<div
+				class="mt-6 inline-flex flex-row items-center pb-2 border-b-2 border-gray-100"
+			>
+				<div v-for="code in splitIntoArray(lang)" class="inline-flex">
+					<p class="px-1">{{ code }}</p>
+					<span aria-hidden="true"> &middot; </span>
+				</div>
+			</div>
+			<div class="mt-4 flex items-center">
+				<div v-for="code in splitIntoArray(framework)" class="inline-flex">
+					<p class="px-1">{{ code }}</p>
+					<span aria-hidden="true"> &middot; </span>
+				</div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -50,6 +63,18 @@
 			},
 			weblink: {
 				required: true,
+			},
+			framework: {
+				required: true,
+			},
+			lang: {
+				required: true,
+			},
+		},
+
+		methods: {
+			splitIntoArray(text) {
+				return text.split(',');
 			},
 		},
 

@@ -31,8 +31,6 @@
 </template>
 
 <script>
-	import PostImage from './PostImage.vue';
-
 	export default {
 		props: {
 			title: {
@@ -43,16 +41,6 @@
 				default: () => [],
 				required: true,
 			},
-		},
-
-		data() {
-			return {
-				serializers: {
-					types: {
-						image: PostImage,
-					},
-				},
-			};
 		},
 
 		methods: {

@@ -1,6 +1,6 @@
 <template>
 	<NuxtLayout name="main">
-		<!-- BLOG / LEARNING -->
+		<!-- PORTFOLIO -->
 		<div
 			class="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8"
 		>
@@ -26,11 +26,14 @@
 									:image="post.mainImage.asset._ref"
 									slug="#"
 									:body="post.body[0].children[0].text"
+									:weblink="post.weblink"
+									:lang="post.codinglang"
+									:framework="post.frameworks"
 								></PortfolioItem>
 							</div>
 						</template>
 						<template #fallback>
-							<p>Loading blog posts...</p>
+							<p>Loading portfolio...</p>
 						</template>
 					</suspense>
 				</div>
@@ -40,7 +43,7 @@
 </template>
 
 <script setup>
-	const postquery = groq`{ "portfolio": *[_type == "portfolio"]{title, slug, mainImage, body}[0...20]}`;
+	const postquery = groq`{ "portfolio": *[_type == "portfolio"][0...20]}`;
 
 	const sanity = useSanity();
 	const { data } = await useAsyncData('data', () => sanity.fetch(postquery));
