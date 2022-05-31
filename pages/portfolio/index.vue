@@ -30,7 +30,7 @@
 									:title="post.title"
 									:image="post.mainImage.asset._ref"
 									slug="#"
-									:body="post.body[0].children[0].text"
+									body="sample"
 									:weblink="post.weblink"
 									:lang="post.codinglang"
 									:framework="post.frameworks"

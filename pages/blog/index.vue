@@ -25,7 +25,7 @@
 				>
 					<suspense>
 						<template #default>
-							<div v-for="post in data.posts">
+							<div v-if="data.posts" v-for="post in data.posts">
 								<Post
 									:title="post.title"
 									:publishedAt="post.publishedAt"
@@ -35,6 +35,9 @@
 									:slug="post.slug.current"
 									:body="post.body[0].children[0].text"
 								></Post>
+							</div>
+							<div v-else>
+								<p>There are currently no posts published...</p>
 							</div>
 						</template>
 						<template #fallback>
