@@ -25,7 +25,7 @@
 				>
 					<suspense>
 						<template #default>
-							<div v-for="post in data.portfolio">
+							<div v-if="data.portfolio" v-for="post in data.portfolio">
 								<PortfolioItem
 									:title="post.title"
 									:image="post.mainImage.asset._ref"
@@ -35,6 +35,9 @@
 									:lang="post.codinglang"
 									:framework="post.frameworks"
 								></PortfolioItem>
+							</div>
+							<div v-else>
+								<p>There are currently no items in my portfolio</p>
 							</div>
 						</template>
 						<template #fallback>
