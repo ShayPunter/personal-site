@@ -23,27 +23,17 @@
 				<div
 					class="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none"
 				>
-					<suspense>
-						<template #default>
-							<div v-if="data.portfolio" v-for="post in data.portfolio">
-								<PortfolioItem
-									:title="post.title"
-									:image="post.mainImage.asset._ref"
-									slug="#"
-									body="sample"
-									:weblink="post.weblink"
-									:lang="post.codinglang"
-									:framework="post.frameworks"
-								></PortfolioItem>
-							</div>
-							<div v-else>
-								<p>There are currently no items in my portfolio</p>
-							</div>
-						</template>
-						<template #fallback>
-							<p>Loading portfolio...</p>
-						</template>
-					</suspense>
+					<div v-for="post in data.portfolio">
+						<PortfolioItem
+							:title="post.title"
+							:image="post.mainImage.asset._ref"
+							slug="#"
+							body="sample"
+							:weblink="post.weblink"
+							:lang="post.codinglang"
+							:framework="post.frameworks"
+						></PortfolioItem>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -51,10 +41,13 @@
 </template>
 
 <script setup>
-	const postquery = groq`{ "portfolio": *[_type == "portfolio"][0...20]}`;
+	const postqueryy = groq`{ "portfolio": *[_type == "portfolio"][0...20]}`;
 
 	const sanity = useSanity();
-	const { data } = await useAsyncData('data', () => sanity.fetch(postquery));
+	const { data } = await useAsyncData('portfolio', () =>
+		sanity.fetch(postqueryy),
+	);
+	console.log(data);
 </script>
 
 <script>
