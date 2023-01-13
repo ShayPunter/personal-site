@@ -34,7 +34,7 @@ export default defineNuxtConfig({
 		],
 	},
 
-	modules: ['@nuxtjs/tailwindcss', '@nuxtjs/sanity'],
+	modules: ['@nuxtjs/tailwindcss', '@nuxtjs/sanity', '@nuxtjs/dayjs'],
 
 	runtimeConfig: {
 		public: {

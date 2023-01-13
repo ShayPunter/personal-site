@@ -8,23 +8,20 @@
 				width="142"
 				height="80"
 				class="h-48 w-full object-cover"
-				loading="lazy"
-			/>
+				loading="lazy" />
 		</div>
 		<div class="flex-1 bg-white p-6 flex flex-col justify-between">
 			<div class="flex-1">
 				<NuxtLink
 					:to="'/blog/' + slug"
 					class="block mt-2 text-xl font-semibold text-gray-900"
-					:key="slug"
-				>
+					:key="slug">
 					{{ title }}
 				</NuxtLink>
 				<NuxtLink
 					:to="'/blog/' + slug"
 					class="block mt-2 mt-3 text-base text-gray-500"
-					:key="slug"
-				>
+					:key="slug">
 					{{ body }}
 				</NuxtLink>
 			</div>
@@ -36,14 +33,13 @@
 						auto="format"
 						:alt="author_name"
 						class="h-10 w-10 rounded-full"
-						loading="lazy"
-					/>
+						loading="lazy" />
 				</div>
 				<div class="ml-3">
 					<p class="text-sm font-medium text-gray-900">Shay</p>
 					<div class="flex space-x-1 text-sm text-gray-500">
-						<time :datetime="publishedAt">
-							{{ publishedAt }}
+						<time :datetime="publishedAt" format="DD/MM/YYYY">
+							{{ $dayjs(publishedAt).format('DD/MM/YYYY') }}
 						</time>
 					</div>
 				</div>
