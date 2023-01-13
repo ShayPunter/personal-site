@@ -36,6 +36,11 @@ export default defineNuxtConfig({
 
 	modules: ['@nuxtjs/tailwindcss', '@nuxtjs/sanity', '@nuxtjs/dayjs'],
 
+	css: ['/static/style.css'],
+	build: {
+		extractCSS: true,
+	},
+
 	runtimeConfig: {
 		public: {
 			sanity: {
