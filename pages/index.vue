@@ -9,7 +9,7 @@
 			<Meta rel="preconnect" href="https://cdn.sanity.io" />
 		</Head>
 		<div
-			id="loader"
+			id="loader-ov"
 			class="loader z-10 flex relative h-screen mx-auto bg-gray-800 transition-all animate__fast"
 		>
 			<div class="m-auto overflow-y-hidden">
@@ -26,12 +26,6 @@
 						style="stroke: rgb(255, 255, 255); stroke-width: 4"
 					/>
 				</svg>
-				<!-- <p
-					id="loader-p"
-					class="animate__animated z-0 text-center text-md mt-2 tracking-tight text-white"
-				>
-					Landing shortly...
-				</p> -->
 			</div>
 		</div>
 
@@ -328,11 +322,6 @@
 		mounted() {
 			this.regListener();
 			this.textScrollIn();
-			// if (localStorage.getItem('visited') === 'true') {
-			// 	document.getElementById('loader').remove();
-			// 	window.scrollTo(0, 0);
-			// 	return;
-			// } disabled for debugging
 
 			// Draw SVG Line In
 			gsap.fromTo(
@@ -399,7 +388,7 @@
 			// Slide Up Page
 			setTimeout(() => {
 				gsap.fromTo(
-					'#loader',
+					'#loader-ov',
 					{
 						y: '0',
 					},
