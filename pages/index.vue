@@ -280,15 +280,38 @@
 </template>
 
 <script setup>
-	const postquery = groq`{ "posts": *[_type == "post"]{title, "author_name": author->name, "authorImg": author->image, publishedAt, slug, mainImage, body}[0...6],
-                              "expr": *[_type == "experience"]{company, role, mainImage, startDate, endDate, location, body[]{
-    ..., 
-    asset->{
+	const postquery = groq`{
+  "posts": *[_type == "post"]{
+    title,
+    "author_name": author->name,
+    "authorImg": author->image,
+    publishedAt,
+    slug,
+    mainImage,
+    body
+  }[0...6],
+
+  "expr": *[_type == "experience"] | order(endDate desc) {
+    company,
+    role,
+    mainImage,
+    startDate,
+    endDate,
+    location,
+    body[] {
       ...,
-      "_key": _id
+      asset->{
+        ...,
+        "_key": _id
+      },
     },
-  }}[0...5],
-  "brands": *[_type == "brands"]{company, mainImage}[0...6]}`;
+  }[0...5],
+
+  "brands": *[_type == "brands"]{
+    company,
+    mainImage
+  }[0...6]
+}`;
 
 	const sanity = useSanity();
 	const { data } = await useAsyncData('data', () => sanity.fetch(postquery));
