@@ -25,7 +25,19 @@
 					class="block mt-2 mt-3 text-base text-gray-500"
 					:key="weblink"
 				>
-					{{ body }}
+
+          <div v-for="section in body" v-bind:key="section._key">
+            <SanityContent
+                v-if="section._type === 'block'"
+                :blocks="[section]"></SanityContent>
+
+            <SanityImage
+                :assetId="section.asset._id"
+                v-if="section && section._type === 'image'"
+                class="my-4"></SanityImage>
+            <br />
+          </div>
+
 				</NuxtLink>
 			</div>
 			<div
