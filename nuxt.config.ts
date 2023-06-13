@@ -9,6 +9,27 @@ export default defineNuxtConfig({
 		htmlAttrs: {
 			lang: 'en',
 		},
+		script: [
+			{
+				hid: 'gtag',
+				src: 'https://www.googletagmanager.com/gtag/js?id=G-SYQ3B5R3NJ',
+				async: true
+			},
+			{
+				hid: 'gtag-init',
+				innerHTML: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-SYQ3B5R3NJ');
+        `,
+				type: 'text/javascript',
+				charset: 'utf-8'
+			}
+		],
+		__dangerouslyDisableSanitizersByTagID: {
+			'gtag-init': ['innerHTML']
+		},
 		meta: [
 			{ charset: 'utf-8' },
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
