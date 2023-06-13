@@ -28,7 +28,7 @@
 							:title="post.title"
 							:image="post.mainImage.asset._ref"
 							slug="#"
-							body="sample"
+							:body="post.body"
 							:weblink="post.weblink"
 							:lang="post.codinglang"
 							:framework="post.frameworks"
