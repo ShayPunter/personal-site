@@ -12,6 +12,11 @@
 		bodyAttrs: {
 			class: 'test',
 		},
+		link: [{
+		  rel: 'me',
+		  href: 'https://social.shaypunter.co.uk/@shay',
+		},
+	      ]
 	});
 </script>
 
