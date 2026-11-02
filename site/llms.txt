@@ -1,0 +1,17 @@
+# Shay Punter
+
+> Personal site of Shay Punter, a developer and project manager who builds things for the web and the teams that make them. It covers his work experience and his writing on software, projects and leading teams.
+
+## Pages
+
+- [Experience](https://shaypunter.co.uk/): roles from 2015 to now, covering full-stack web development (Laravel, Vue.js, WordPress, Shopify) and digital project management
+- [Writing](https://shaypunter.co.uk/writing/): list of posts, newest first
+
+## Writing
+
+- [3 things you should implement to see better results from your project team](https://shaypunter.co.uk/writing/3-things-you-should-implement-to-see-better-results-from-your-project-team/): daily standups, an end-of-day chat channel and weekly review sessions (January 2023)
+
+## Elsewhere
+
+- [GitHub](https://github.com/ShayPunter)
+- [LinkedIn](https://www.linkedin.com/in/shaypunter/)
