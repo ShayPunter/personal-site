@@ -1,42 +1,24 @@
-# Nuxt 3 Minimal Starter
+# shaypunter.co.uk
 
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+My personal site. It's plain HTML and CSS in `site/`, with no framework or build step.
 
-## Setup
+## Editing
 
-Make sure to install the dependencies:
+- `site/index.html`: the home page and experience
+- `site/writing/index.html`: the list of posts
+- `site/writing/<slug>/index.html`: one folder per post
+- `site/style.css`: styles for every page
 
-```bash
-# yarn
-yarn install
+Each page has its own copy of the sidebar, so a sidebar change needs making in every page.
 
-# npm
-npm install
-
-# pnpm
-pnpm install --shamefully-hoist
-```
-
-## Development Server
-
-Start the development server on http://localhost:3000
+## Previewing locally
 
 ```bash
-npm run dev
+python -m http.server 8080 --directory site
 ```
 
-## Production
+Then open http://localhost:8080.
 
-Build the application for production:
+## Deploying
 
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.
+Cloudflare Pages deploys `site/` as it is, with no build command (see `wrangler.toml`). Pushing to `master` deploys to production, and other branches get preview deployments. `site/_redirects` sends the old `/blog` and `/portfolio` URLs to their new homes.
