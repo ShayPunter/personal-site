@@ -1,3 +1,26 @@
+/* Fonts are self-hosted (latin subset, from Google Fonts) to avoid a
+   render-blocking third-party stylesheet */
+@font-face {
+	font-family: 'Archivo';
+	font-weight: 800;
+	font-display: swap;
+	src: url('/fonts/archivo-800-latin.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Instrument Sans';
+	font-weight: 400 500;
+	font-display: swap;
+	src: url('/fonts/instrument-sans-latin.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Geist Mono';
+	font-weight: 400;
+	font-display: swap;
+	src: url('/fonts/geist-mono-400-latin.woff2') format('woff2');
+}
+
 :root {
 	--paper: #faf7f0;
 	--ink: #12151c;
